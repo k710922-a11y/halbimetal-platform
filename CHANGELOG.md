@@ -18,6 +18,9 @@
 
 ### Added
 
+- Metal Injection, Blabbermouth 및 국내 밴드 공연·모집 검색 RSS를 6시간마다 수집하는 GitHub Actions 뉴스봇
+- Member Hub 메탈·하드록 뉴스와 아마추어 공연 기회 게시판
+
 - Public 메뉴 콘텐츠 편집이 가능한 Admin Control Room
 - IndexedDB 기반 곡·MP3·메타데이터 라이브러리
 - 합주 일정, RSVP, 세트리스트, 공지, 멤버 소통을 포함한 Member Hub

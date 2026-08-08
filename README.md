@@ -42,6 +42,12 @@ GitHub Pages는 정적 호스팅이므로 현재 프로토타입은 브라우저
 
 같은 브라우저에서는 Admin에서 입력한 내용이 Public Site와 Member Hub에 반영됩니다. 다른 기기·멤버 간 공유, 로그인과 권한 관리는 Supabase/Postgres 같은 원격 DB와 인증을 연결하는 다음 단계에서 구현합니다.
 
+## 자동 뉴스·공연 정보 게시판
+
+`.github/workflows/news-scrape.yml`이 6시간마다 공개 RSS를 수집하고 `public/data/metal-news.json`을 갱신합니다. 수집 대상은 Metal Injection, Blabbermouth, 국내 아마추어 밴드 공연·경연·모집 관련 Google News 검색 피드입니다. 원문을 복제하지 않고 제목, 출처, 날짜와 링크만 제공합니다.
+
+GitHub Actions의 `refresh-news-board`는 수동 실행할 수도 있습니다. 뉴스 수집 완료 후 `deploy` 워크플로가 자동으로 GitHub Pages를 다시 배포합니다. 특정 사이트가 응답하지 않아도 나머지 피드는 계속 반영되며 오류는 JSON의 `errors`에 기록됩니다.
+
 ## 배포 주소
 
 무료 초기 도메인 목표는 `https://halbimetal.github.io`입니다. 이 주소를 사용하려면 GitHub 사용자 또는 조직 이름이 `halbimetal`이고 저장소 이름이 `halbimetal.github.io`여야 합니다. 다른 소유자 계정의 프로젝트 저장소를 쓰면 기본 주소는 `https://<owner>.github.io/<repository>/`입니다. `vite.config.js`가 두 배포 경로를 자동 판별합니다.

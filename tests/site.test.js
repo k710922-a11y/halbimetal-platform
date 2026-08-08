@@ -60,3 +60,9 @@ test('each rehearsal list has five-item pagination controls', () => {
   assert.match(hubHtml, /id="vocal-pagination"/);
   assert.match(hubHtml, /id="wishlist-pagination"/);
 });
+
+test('member hub includes the automated metal news and gig board', () => {
+  assert.match(hubHtml, /id="metal-news"/);
+  assert.match(hubHtml, /data-news-filter="opportunity"/);
+  assert.match(hubHtml, /id="news-list"/);
+});

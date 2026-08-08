@@ -1,0 +1,40 @@
+name: refresh-news-board
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/fetch-news.mjs
+      - .github/workflows/news-scrape.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-news-board
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Collect public RSS feeds
+        run: node scripts/fetch-news.mjs
+      - name: Commit refreshed board data
+        run: |
+          if git diff --quiet -- public/data/metal-news.json; then
+            echo "No news changes"
+            exit 0
+          fi
+          git config user.name "halbimetal-news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/metal-news.json
+          git commit -m "chore: refresh metal news board"
+          git push
