@@ -36,6 +36,14 @@ test('admin provides content, song, schedule and notice management', () => {
   for (const id of ['content-form', 'song-form', 'schedule-form', 'notice-form']) assert.match(adminHtml, new RegExp(`id="${id}"`));
 });
 
+test('admin song database includes five-item pagination', () => {
+  assert.match(adminHtml, /id="admin-song-pagination"/);
+});
+
+test('public repertoire contains the agreed five songs', () => {
+  for (const song of ['Save Me', 'All She Wrote', 'Too Young to Fall in Love', "Since You've Been Gone", 'Cum on Feel the Noize']) assert.match(html, new RegExp(song));
+});
+
 test('member hub provides RSVP, setlist, notices and member talk', () => {
   for (const id of ['cover-vocal-list', 'wishlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
   assert.match(hubHtml, /data-rsvp="참석"/);
