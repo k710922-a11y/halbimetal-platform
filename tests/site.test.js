@@ -28,6 +28,8 @@ test('public site links to the member and admin apps', () => {
   assert.match(html, /hub\.html/);
   assert.match(html, /admin\.html/);
   assert.match(html, /halbimetal-logo-black\.png/);
+  assert.match(html, /class="hub-nav-button"/);
+  assert.match(html, /aria-label="Admin 설정"/);
 });
 
 test('admin provides content, song, schedule and notice management', () => {

@@ -6,6 +6,7 @@
 
 ### Changed
 
+- Public 헤더의 HUB를 흰색 강조 버튼으로, Admin을 설정 아이콘으로 변경
 - Member Hub 연습곡을 메탈 커버의 보컬 연습/공연곡과 Wish List, 편곡/자작곡 TBD로 재구성
 - Admin 곡 DB에서 업로드된 곡을 연습곡 세션에 지정하도록 개선
 - 각 선택 곡에 저장된 MP3 플레이어 연결
