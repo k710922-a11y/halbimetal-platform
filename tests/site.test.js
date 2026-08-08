@@ -35,6 +35,13 @@ test('admin provides content, song, schedule and notice management', () => {
 });
 
 test('member hub provides RSVP, setlist, notices and member talk', () => {
-  for (const id of ['setlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
+  for (const id of ['cover-vocal-list', 'wishlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
   assert.match(hubHtml, /data-rsvp="참석"/);
+});
+
+test('rehearsal songs use the requested cover sessions and TBD originals', () => {
+  assert.match(hubHtml, /보컬\(joshthejaws\)가 연습\/공연곡/);
+  assert.match(hubHtml, /Wish List/);
+  assert.match(hubHtml, /편곡\/자작곡/);
+  assert.match(hubHtml, /TBD/);
 });

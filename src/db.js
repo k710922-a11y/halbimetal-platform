@@ -30,6 +30,7 @@ function transaction(mode, action) {
 
 export const getSongs = () => transaction('readonly', (store) => store.getAll());
 export const addSong = (song) => transaction('readwrite', (store) => store.add(song));
+export const updateSong = (song) => transaction('readwrite', (store) => store.put(song));
 export const deleteSong = (id) => transaction('readwrite', (store) => store.delete(id));
 
 export function formatBytes(bytes = 0) {

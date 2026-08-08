@@ -1,5 +1,6 @@
 import './portal.css';
-import { addSong, deleteSong, formatBytes, getSongs, loadJson, saveJson } from './db.js';
+import './rehearsal.css';
+import { addSong, deleteSong, formatBytes, getSongs, loadJson, saveJson, updateSong } from './db.js';
 
 const CONTENT_KEY = 'halbi.content';
 const SCHEDULE_KEY = 'halbi.schedule';
@@ -24,15 +25,24 @@ contentForm.addEventListener('submit', (event) => {
 const songForm = document.querySelector('#song-form');
 songForm.addEventListener('submit', async (event) => {
   event.preventDefault(); const data = new FormData(songForm); const file = data.get('audio');
-  await addSong({ artist:data.get('artist'), title:data.get('title'), album:data.get('album'), bpm:data.get('bpm'), key:data.get('key'), progress:Number(data.get('progress')||0), notes:data.get('notes'), file:file?.size ? file : null, fileName:file?.name||'', fileType:file?.type||'', fileSize:file?.size||0, createdAt:new Date().toISOString() });
+  await addSong({ artist:data.get('artist'), title:data.get('title'), album:data.get('album'), bpm:data.get('bpm'), key:data.get('key'), progress:Number(data.get('progress')||0), notes:data.get('notes'), session:'unassigned', file:file?.size ? file : null, fileName:file?.name||'', fileType:file?.type||'', fileSize:file?.size||0, createdAt:new Date().toISOString() });
   songForm.reset(); document.querySelector('#song-feedback').textContent = '곡이 로컬 DB에 추가되었습니다.'; renderSongs();
 });
 
 async function renderSongs() {
   const songs = (await getSongs()).sort((a,b) => b.id-a.id); document.querySelector('#song-count').textContent = `${songs.length} TRACKS`;
-  document.querySelector('#song-table').innerHTML = songs.map((song) => `<tr><td><b>${escapeHtml(song.artist)} — ${escapeHtml(song.title)}</b><small>${escapeHtml(song.album||'앨범 정보 없음')}</small></td><td>${song.bpm||'—'} BPM · ${escapeHtml(song.key||'—')}</td><td>${song.file ? `<audio controls src="${URL.createObjectURL(song.file)}"></audio><small>${escapeHtml(song.fileName)} · ${formatBytes(song.fileSize)}</small>`:'파일 없음'}</td><td><div class="progress"><i style="width:${song.progress}%"></i></div><small>${song.progress}%</small></td><td><button class="delete-button" data-delete="${song.id}">삭제</button></td></tr>`).join('') || '<tr><td colspan="5" class="empty">등록된 곡이 없습니다.</td></tr>';
+  document.querySelector('#song-table').innerHTML = songs.map((song) => `<tr><td><b>${escapeHtml(song.artist)} — ${escapeHtml(song.title)}</b><small>${escapeHtml(song.album||'앨범 정보 없음')}</small></td><td><select class="session-select" data-assign="${song.id}" aria-label="${escapeHtml(song.title)} 연습곡 세션"><option value="unassigned" ${!song.session||song.session==='unassigned'?'selected':''}>미분류</option><option value="vocal" ${song.session==='vocal'?'selected':''}>보컬 연습/공연곡</option><option value="wishlist" ${song.session==='wishlist'?'selected':''}>Wish List</option></select></td><td>${song.bpm||'—'} BPM · ${escapeHtml(song.key||'—')}</td><td>${song.file ? `<audio controls src="${URL.createObjectURL(song.file)}"></audio><small>${escapeHtml(song.fileName)} · ${formatBytes(song.fileSize)}</small>`:'파일 없음'}</td><td><div class="progress"><i style="width:${song.progress}%"></i></div><small>${song.progress}%</small></td><td><button class="delete-button" data-delete="${song.id}">삭제</button></td></tr>`).join('') || '<tr><td colspan="6" class="empty">등록된 곡이 없습니다.</td></tr>';
 }
 document.querySelector('#song-table').addEventListener('click', async (e) => { if(e.target.dataset.delete){ await deleteSong(Number(e.target.dataset.delete)); renderSongs(); } });
+document.querySelector('#song-table').addEventListener('change', async (e) => {
+  if (!e.target.dataset.assign) return;
+  const songs = await getSongs();
+  const song = songs.find((item) => item.id === Number(e.target.dataset.assign));
+  if (!song) return;
+  song.session = e.target.value;
+  await updateSong(song);
+  document.querySelector('#song-feedback').textContent = `${song.title}의 연습곡 세션이 변경되었습니다.`;
+});
 
 const scheduleForm = document.querySelector('#schedule-form'); const schedule = loadJson(SCHEDULE_KEY, {});
 scheduleForm.date.value=schedule.date||''; scheduleForm.venue.value=schedule.venue||''; scheduleForm.note.value=schedule.note||'';
