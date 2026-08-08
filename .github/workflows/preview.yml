@@ -1,0 +1,26 @@
+name: preview
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-pr-${{ github.event.pull_request.number }}
+          path: dist
+          retention-days: 7
+      - name: Add workflow summary
+        run: echo "### Preview build ready" >> "$GITHUB_STEP_SUMMARY"
