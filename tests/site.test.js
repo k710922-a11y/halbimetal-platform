@@ -27,7 +27,7 @@ test('page has essential accessibility metadata', () => {
 test('public site links to the member and admin apps', () => {
   assert.match(html, /hub\.html/);
   assert.match(html, /admin\.html/);
-  assert.match(html, /halbimetal-logo-black\.png/);
+  assert.match(html, /halbimetal-logo-transparent\.png/);
   assert.match(html, /class="hub-nav-button"/);
   assert.match(html, /aria-label="Admin 설정"/);
 });
