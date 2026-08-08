@@ -65,4 +65,10 @@ test('member hub includes the automated metal news and gig board', () => {
   assert.match(hubHtml, /id="metal-news"/);
   assert.match(hubHtml, /data-news-filter="opportunity"/);
   assert.match(hubHtml, /id="news-list"/);
+  assert.match(hubHtml, /id="news-pagination"/);
+});
+
+test('admin and member hub use the transparent header logo', () => {
+  assert.match(adminHtml, /halbimetal-logo-transparent\.png/);
+  assert.match(hubHtml, /halbimetal-logo-transparent\.png/);
 });
