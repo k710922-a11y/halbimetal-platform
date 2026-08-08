@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const adminHtml = await readFile(new URL('../admin.html', import.meta.url), 'utf8');
+const hubHtml = await readFile(new URL('../hub.html', import.meta.url), 'utf8');
 
 test('brand and core message are present', () => {
   assert.match(html, /HALBI METAL/);
@@ -20,4 +22,19 @@ test('page has essential accessibility metadata', () => {
   assert.match(html, /lang="ko"/);
   assert.match(html, /viewport/);
   assert.match(html, /<main id="main">/);
+});
+
+test('public site links to the member and admin apps', () => {
+  assert.match(html, /hub\.html/);
+  assert.match(html, /admin\.html/);
+  assert.match(html, /halbimetal-logo-black\.png/);
+});
+
+test('admin provides content, song, schedule and notice management', () => {
+  for (const id of ['content-form', 'song-form', 'schedule-form', 'notice-form']) assert.match(adminHtml, new RegExp(`id="${id}"`));
+});
+
+test('member hub provides RSVP, setlist, notices and member talk', () => {
+  for (const id of ['setlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
+  assert.match(hubHtml, /data-rsvp="참석"/);
 });

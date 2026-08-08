@@ -30,6 +30,17 @@ npm run check
 - Repertoire
 - Media
 - Partnership & Contact
+- Admin Control Room (`/admin.html`)
+- Member Hub / BAND OS (`/hub.html`)
+
+## v0.2 로컬 데이터 구조
+
+GitHub Pages는 정적 호스팅이므로 현재 프로토타입은 브라우저 저장소를 사용합니다.
+
+- 메뉴 콘텐츠, 일정, RSVP, 공지, 멤버 메시지: `localStorage`
+- 곡 정보와 MP3 파일 Blob: `IndexedDB`의 `songs` object store
+
+같은 브라우저에서는 Admin에서 입력한 내용이 Public Site와 Member Hub에 반영됩니다. 다른 기기·멤버 간 공유, 로그인과 권한 관리는 Supabase/Postgres 같은 원격 DB와 인증을 연결하는 다음 단계에서 구현합니다.
 
 ## 배포 주소
 
@@ -39,7 +50,7 @@ GitHub 저장소 Settings → Pages → Source를 **GitHub Actions**로 선택�
 
 ## 로고
 
-현재 확인 가능한 원본 첨부가 없어 임시 타이포그래픽 배지를 사용합니다. 승인된 원본은 `public/logos/`에 추가하고 해당 폴더의 안내에 따라 교체합니다.
+사용자가 제공한 승인 로고 원본 2종을 `public/logos/`에 반영했습니다.
 
 ## 문서
 

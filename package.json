@@ -1,11 +1,11 @@
 {
   "name": "halbimetal-platform",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --configLoader runner",
     "preview": "vite preview",
     "test": "node --test",
     "check": "npm run test && npm run build"

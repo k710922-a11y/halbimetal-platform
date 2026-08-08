@@ -9,6 +9,14 @@ menuButton?.addEventListener('click', () => {
   nav.classList.toggle('open', !open);
 });
 
+try {
+  const content = JSON.parse(localStorage.getItem('halbi.content') || '{}');
+  document.querySelectorAll('[data-content]').forEach((element) => {
+    const [section, field] = element.dataset.content.split('.');
+    if (content[section]?.[field]) element.textContent = content[section][field];
+  });
+} catch { /* Keep bundled defaults when local content is invalid. */ }
+
 nav?.addEventListener('click', (event) => {
   if (event.target.matches('a')) {
     menuButton?.setAttribute('aria-expanded', 'false');
