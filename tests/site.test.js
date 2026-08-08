@@ -47,3 +47,8 @@ test('rehearsal songs use the requested cover sessions and TBD originals', () =>
   assert.match(hubHtml, /편곡\/자작곡/);
   assert.match(hubHtml, /TBD/);
 });
+
+test('each rehearsal list has five-item pagination controls', () => {
+  assert.match(hubHtml, /id="vocal-pagination"/);
+  assert.match(hubHtml, /id="wishlist-pagination"/);
+});
