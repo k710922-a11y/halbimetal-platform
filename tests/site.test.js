@@ -44,9 +44,15 @@ test('public repertoire contains the agreed five songs', () => {
   for (const song of ['Save Me', 'All She Wrote', 'Too Young to Fall in Love', "Since You've Been Gone", 'Cum on Feel the Noize']) assert.match(html, new RegExp(song));
 });
 
-test('member hub provides RSVP, setlist, notices and member talk', () => {
+test('member hub provides schedule guidance, setlist, notices and member talk', () => {
   for (const id of ['cover-vocal-list', 'wishlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
-  assert.match(hubHtml, /data-rsvp="참석"/);
+  assert.match(hubHtml, /그룹 카카오톡을 참조해주세요/);
+  assert.doesNotMatch(hubHtml, /data-rsvp=/);
+});
+
+test('admin schedule form includes visible save feedback', () => {
+  assert.match(adminHtml, /id="schedule-save-button"/);
+  assert.match(adminHtml, /id="schedule-feedback"/);
 });
 
 test('rehearsal songs use the requested cover sessions and TBD originals', () => {

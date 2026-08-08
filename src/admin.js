@@ -1,6 +1,7 @@
 import './portal.css';
 import './rehearsal.css';
 import './setlist-pagination.css';
+import './schedule-feedback.css';
 import { addSong, deleteSong, formatBytes, getSongs, loadJson, saveJson, updateSong } from './db.js';
 
 const CONTENT_KEY = 'halbi.content';
@@ -52,7 +53,8 @@ document.querySelector('#admin-song-pagination').addEventListener('click',(event
 
 const scheduleForm = document.querySelector('#schedule-form'); const schedule = loadJson(SCHEDULE_KEY, {});
 scheduleForm.date.value=schedule.date||''; scheduleForm.venue.value=schedule.venue||''; scheduleForm.note.value=schedule.note||'';
-scheduleForm.addEventListener('submit',(e)=>{e.preventDefault();saveJson(SCHEDULE_KEY,Object.fromEntries(new FormData(scheduleForm)));});
+scheduleForm.addEventListener('submit',(e)=>{e.preventDefault();saveJson(SCHEDULE_KEY,Object.fromEntries(new FormData(scheduleForm)));const button=document.querySelector('#schedule-save-button');button.textContent='저장됨 ✓';button.classList.add('saved');document.querySelector('#schedule-feedback').textContent='합주 일정이 저장되었습니다.';});
+scheduleForm.addEventListener('input',()=>{const button=document.querySelector('#schedule-save-button');button.textContent='일정 저장';button.classList.remove('saved');document.querySelector('#schedule-feedback').textContent='';});
 document.querySelector('#notice-form').addEventListener('submit',(e)=>{e.preventDefault();const form=e.currentTarget;const notices=loadJson(NOTICE_KEY,[]);notices.unshift({...Object.fromEntries(new FormData(form)),createdAt:new Date().toISOString()});saveJson(NOTICE_KEY,notices.slice(0,20));form.reset();});
 function escapeHtml(value=''){const div=document.createElement('div');div.textContent=value;return div.innerHTML;}
 renderSongs();
