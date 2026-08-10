@@ -62,9 +62,14 @@ test('rehearsal songs use the requested cover sessions and TBD originals', () =>
   assert.match(hubHtml, /TBD/);
 });
 
-test('each rehearsal list has five-item pagination controls', () => {
+test('each rehearsal list has ten-item pagination controls', () => {
   assert.match(hubHtml, /id="vocal-pagination"/);
   assert.match(hubHtml, /id="wishlist-pagination"/);
+});
+
+test('song uploads store metadata without BPM or an audio player', () => {
+  assert.doesNotMatch(adminHtml, /name="bpm"/);
+  assert.match(adminHtml, /id="audio-metadata-feedback"/);
 });
 
 test('member hub includes the automated metal news and gig board', () => {

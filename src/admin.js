@@ -3,6 +3,7 @@ import './rehearsal.css';
 import './setlist-pagination.css';
 import './schedule-feedback.css';
 import { addSong, deleteSong, formatBytes, getSongs, loadJson, saveJson, updateSong } from './db.js';
+import { extractAudioMetadata, formatDuration } from './audio-metadata.js';
 
 const CONTENT_KEY = 'halbi.content';
 const SCHEDULE_KEY = 'halbi.schedule';
@@ -27,16 +28,27 @@ contentForm.addEventListener('submit', (event) => {
 });
 
 const songForm = document.querySelector('#song-form');
+let parsedAudio = null;
+songForm.audio.addEventListener('change', async () => {
+  const file = songForm.audio.files[0];
+  parsedAudio = file ? await extractAudioMetadata(file) : null;
+  if (!parsedAudio) return;
+  if (parsedAudio.artist && !songForm.artist.value) songForm.artist.value = parsedAudio.artist;
+  if (parsedAudio.title && !songForm.title.value) songForm.title.value = parsedAudio.title;
+  if (parsedAudio.album && !songForm.album.value) songForm.album.value = parsedAudio.album;
+  document.querySelector('#audio-metadata-feedback').textContent = `${parsedAudio.fileName} · ${formatDuration(parsedAudio.duration)} · ${formatBytes(parsedAudio.fileSize)} — 메타데이터만 읽었으며 파일은 저장하지 않습니다.`;
+});
 songForm.addEventListener('submit', async (event) => {
   event.preventDefault(); const data = new FormData(songForm); const file = data.get('audio');
-  await addSong({ artist:data.get('artist'), title:data.get('title'), album:data.get('album'), bpm:data.get('bpm'), key:data.get('key'), progress:Number(data.get('progress')||0), notes:data.get('notes'), session:'unassigned', file:file?.size ? file : null, fileName:file?.name||'', fileType:file?.type||'', fileSize:file?.size||0, createdAt:new Date().toISOString() });
-  songForm.reset(); adminSongPage = 1; document.querySelector('#song-feedback').textContent = '곡이 로컬 DB에 추가되었습니다.'; renderSongs();
+  const metadata = file?.size ? (parsedAudio || await extractAudioMetadata(file)) : {};
+  await addSong({ artist:data.get('artist'), title:data.get('title'), album:data.get('album'), key:data.get('key'), progress:Number(data.get('progress')||0), notes:data.get('notes'), session:'unassigned', ...metadata, createdAt:new Date().toISOString() });
+  songForm.reset(); parsedAudio = null; document.querySelector('#audio-metadata-feedback').textContent = ''; adminSongPage = 1; document.querySelector('#song-feedback').textContent = '곡 메타데이터가 추가되었습니다. 오디오 파일은 저장하지 않았습니다.'; renderSongs();
 });
 
 async function renderSongs() {
   const songs = (await getSongs()).sort((a,b) => b.id-a.id); document.querySelector('#song-count').textContent = `${songs.length} TRACKS`;
   const totalPages=Math.max(1,Math.ceil(songs.length/ADMIN_PAGE_SIZE));adminSongPage=Math.min(adminSongPage,totalPages);const start=(adminSongPage-1)*ADMIN_PAGE_SIZE;
-  document.querySelector('#song-table').innerHTML = songs.slice(start,start+ADMIN_PAGE_SIZE).map((song) => `<tr><td><b>${escapeHtml(song.artist)} — ${escapeHtml(song.title)}</b><small>${escapeHtml(song.album||'앨범 정보 없음')}</small></td><td><select class="session-select" data-assign="${song.id}" aria-label="${escapeHtml(song.title)} 연습곡 세션"><option value="unassigned" ${!song.session||song.session==='unassigned'?'selected':''}>미분류</option><option value="vocal" ${song.session==='vocal'?'selected':''}>보컬 연습/공연곡</option><option value="wishlist" ${song.session==='wishlist'?'selected':''}>Wish List</option></select></td><td>${song.bpm||'—'} BPM · ${escapeHtml(song.key||'—')}</td><td>${song.file ? `<audio controls src="${URL.createObjectURL(song.file)}"></audio><small>${escapeHtml(song.fileName)} · ${formatBytes(song.fileSize)}</small>`:'파일 없음'}</td><td><div class="progress"><i style="width:${song.progress}%"></i></div><small>${song.progress}%</small></td><td><button class="delete-button" data-delete="${song.id}">삭제</button></td></tr>`).join('') || '<tr><td colspan="6" class="empty">등록된 곡이 없습니다.</td></tr>';
+  document.querySelector('#song-table').innerHTML = songs.slice(start,start+ADMIN_PAGE_SIZE).map((song) => `<tr><td><b>${escapeHtml(song.artist)} — ${escapeHtml(song.title)}</b><small>${escapeHtml(song.album||'앨범 정보 없음')}</small></td><td><select class="session-select" data-assign="${song.id}" aria-label="${escapeHtml(song.title)} 연습곡 세션"><option value="unassigned" ${!song.session||song.session==='unassigned'?'selected':''}>미분류</option><option value="vocal" ${song.session==='vocal'?'selected':''}>보컬 연습/공연곡</option><option value="wishlist" ${song.session==='wishlist'?'selected':''}>Wish List</option></select></td><td>${escapeHtml(song.key||'—')}</td><td><b>${escapeHtml(song.fileName||'직접 입력')}</b><small>${formatDuration(song.duration)} · ${escapeHtml(song.fileType||'—')} · ${formatBytes(song.fileSize)}</small></td><td><div class="progress"><i style="width:${song.progress}%"></i></div><small>${song.progress}%</small></td><td><button class="delete-button" data-delete="${song.id}">삭제</button></td></tr>`).join('') || '<tr><td colspan="6" class="empty">등록된 곡이 없습니다.</td></tr>';
   document.querySelector('#admin-song-pagination').innerHTML=songs.length>ADMIN_PAGE_SIZE?`<button data-admin-page="prev" ${adminSongPage===1?'disabled':''}>← 이전</button><span>${adminSongPage} / ${totalPages}</span><button data-admin-page="next" ${adminSongPage===totalPages?'disabled':''}>다음 →</button>`:'';
 }
 document.querySelector('#song-table').addEventListener('click', async (e) => { if(e.target.dataset.delete){ await deleteSong(Number(e.target.dataset.delete)); renderSongs(); } });

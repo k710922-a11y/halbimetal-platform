@@ -1,5 +1,5 @@
 const DB_NAME = 'halbimetal-band-os';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const SONGS = 'songs';
 
 export function openDatabase() {
@@ -11,6 +11,17 @@ export function openDatabase() {
         const store = db.createObjectStore(SONGS, { keyPath: 'id', autoIncrement: true });
         store.createIndex('artist', 'artist');
         store.createIndex('title', 'title');
+      } else if (request.oldVersion < 2) {
+        const store = request.transaction.objectStore(SONGS);
+        store.openCursor().onsuccess = (event) => {
+          const cursor = event.target.result;
+          if (!cursor) return;
+          const song = cursor.value;
+          delete song.file;
+          delete song.bpm;
+          cursor.update(song);
+          cursor.continue();
+        };
       }
     };
     request.onsuccess = () => resolve(request.result);
