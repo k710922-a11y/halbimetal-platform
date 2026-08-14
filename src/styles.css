@@ -5,3 +5,18 @@
 .site-header nav{align-items:center}.site-header nav>a{display:flex;align-items:center;min-height:34px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.site-header nav .hub-nav-button{background:#fff;color:#090909;padding:.65rem .9rem}.site-header nav .admin-nav-button{display:grid;place-items:center;width:34px;height:34px;border:1px solid #777;border-radius:50%;font-size:1.1rem;line-height:1}.site-header nav .admin-nav-button:hover,.site-header nav .admin-nav-button:focus-visible{background:#fff;color:#090909;border-color:#fff}@media(max-width:760px){.site-header nav .hub-nav-button{width:max-content}.site-header nav .admin-nav-button{width:38px;height:38px}}
 .wordmark{display:block;height:58px;font-size:0}.wordmark img{height:100%;width:135px;object-fit:contain}.hero-logo{width:min(48vw,650px);max-height:65vh;object-fit:contain;filter:drop-shadow(0 20px 35px #000);justify-self:center}@media(max-width:760px){.hero-logo{width:min(92vw,580px)}}
+
+/* Six-piece stage-inspired line-up: guitars flank the vocalist, rhythm and keys anchor the second row. */
+.lineup-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"lead vocal second" "keyboard drums bass";border:0;gap:1px;background:#444;overflow:hidden}
+.member-card{position:relative;min-height:0!important;aspect-ratio:4/5;padding:0!important;border:0!important;overflow:hidden;background:linear-gradient(145deg,#181818 0%,#080808 70%)}
+.member-card.lead-guitar{grid-area:lead}.member-card.vocal{grid-area:vocal}.member-card.second-guitar{grid-area:second}.member-card.keyboard{grid-area:keyboard}.member-card.drums{grid-area:drums}.member-card.bass{grid-area:bass}
+.member-image{position:absolute;inset:.8rem .8rem 0;display:flex;align-items:flex-end;justify-content:center}
+.member-image::after{content:"";position:absolute;inset:auto 0 0;height:28%;background:linear-gradient(transparent,#090909)}
+.member-image img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 24px rgba(0,0,0,.6));transition:transform .35s ease,filter .35s ease}
+.member-role{position:absolute;z-index:1;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;padding:1.25rem 1.35rem;background:linear-gradient(transparent,rgba(9,9,9,.94) 42%)}
+.member-role b{font-family:'Archivo Black',sans-serif;font-size:clamp(1rem,1.7vw,1.55rem);line-height:1;letter-spacing:-.02em}
+.member-role span{flex:none;color:var(--acid);font-size:.58rem;letter-spacing:.12em;font-weight:800}
+.member-card:hover .member-image img,.member-card:focus-within .member-image img{transform:scale(1.025);filter:drop-shadow(0 18px 30px rgba(216,255,0,.14))}
+@media(max-width:900px){.lineup-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"vocal lead" "second bass" "keyboard drums"}.member-role{align-items:flex-start;flex-direction:column;gap:.45rem}}
+@media(max-width:560px){.lineup-grid{grid-template-columns:1fr;grid-template-areas:"vocal" "lead" "second" "bass" "keyboard" "drums"}.member-card{aspect-ratio:4/4.7}.member-image{inset:.65rem .65rem 0}.member-role{padding:1.2rem 1.25rem}.member-role b{font-size:1.35rem}}
+@media(prefers-reduced-motion:reduce){.member-image img{transition:none}.member-card:hover .member-image img,.member-card:focus-within .member-image img{transform:none}}

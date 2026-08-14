@@ -44,6 +44,16 @@ test('public repertoire contains the agreed five songs', () => {
   for (const song of ['Save Me', 'All She Wrote', 'Too Young to Fall in Love', "Since You've Been Gone", 'Cum on Feel the Noize']) assert.match(html, new RegExp(song));
 });
 
+test('public line-up presents all six member positions and portraits', () => {
+  for (const role of ['VOCAL', 'LEAD GUITAR', 'SECOND GUITAR', 'BASS', 'KEYBOARD', 'DRUMS']) {
+    assert.match(html, new RegExp(role));
+  }
+
+  for (const portrait of ['vocal.webp', 'lead-guitar.webp', 'second-guitar.webp', 'bass.webp', 'keyboard.webp', 'drums.webp']) {
+    assert.match(html, new RegExp(`members/${portrait}`));
+  }
+});
+
 test('member hub provides schedule guidance, setlist, notices and member talk', () => {
   for (const id of ['cover-vocal-list', 'wishlist-list', 'notice-list', 'post-form']) assert.match(hubHtml, new RegExp(`id="${id}"`));
   assert.match(hubHtml, /그룹 카카오톡을 참조해주세요/);
