@@ -1,6 +1,22 @@
 {
-  "generatedAt": "2026-08-15T07:00:42.361Z",
+  "generatedAt": "2026-08-15T13:01:45.450Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOkZvcm1l",
+      "title": "Former MUSHROOMHEAD Vocalist WAYLON REAVIS&#039;s A KILLER&#039;S CONFESSION Reimagines THE WEEKND&#039;s &#039;Blinding Lights&#039;",
+      "url": "https://blabbermouth.net/news/former-mushroomhead-vocalist-waylon-reaviss-a-killers-confession-reimagines-the-weeknds-blinding-lights",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-15T12:05:39.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOkV4LUJV",
+      "title": "Ex-BUTCHER BABIES Singer CARLA HARVEY&#039;s Band THE VIOLENT HOUR Shares New Single &#039;Screenager&#039;, Sets 2026 Festival Dates",
+      "url": "https://blabbermouth.net/news/ex-butcher-babies-singer-carla-harveys-band-the-violent-hour-shares-new-single-screenager-sets-2026-festival-dates",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-15T11:46:05.000Z"
+    },
     {
       "id": "QmxhYmJlcm1vdXRoOlNMSVBL",
       "title": "SLIPKNOT Officially Parts Ways With SID WILSON: &#039;We Wish Him The Best In His Future Endeavors&#039;",
@@ -146,22 +162,6 @@
       "publishedAt": "2026-08-14T15:17:58.000Z"
     },
     {
-      "id": "TWV0YWwgSW5qZWN0aW9uOkFM",
-      "title": "ALLT Recounts The Non-Musical Influences For Their Newest Album, &#039;Ataraxia&#039;",
-      "url": "https://metalinjection.net/lists/allt-recounts-the-non-musical-influences-for-their-newest-album-ataraxia",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-08-14T14:32:25.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOlNLSUxM",
-      "title": "SKILLET Announces &#039;After The Storm&#039; EP, Shares New Single &#039;Lift Me Up&#039;",
-      "url": "https://blabbermouth.net/news/skillet-announces-after-the-storm-ep-shares-new-single-lift-me-up",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-08-14T14:31:31.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
       "title": "동작구, '제1회 청년 창작 문화 페스티벌' 참가자 모집 - BBS불교방송",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4zT0JLNXNSeFRaNFI1Vkk1Qm9wMEUxc0lGYmZiSTJMSThkYkVMYVN3WFdNYjVCSDkwclRxVHh2NDY1MWQ2dWlvbFBCb0RlSmx5VGZ6dm51ZHM5OVVLNkhJbHJOQ3pQWmJ4dGk4?oc=5",
@@ -219,7 +219,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "평택시, 제16회 전국밴드경연대회 개최…7월 26일까지 참가 접수 - 경인매일",
+      "title": "평택시, 제16회 전국밴드경연대회 개최…7월 26일까지 참가 접수 - kmaeil.com",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBtclNpRUdDVU9lSV84RmVEc1pzSk5rRzNnLS12NFBINEVRb1lodGozT2c0by10ZF84LW9NYV9XQ1BiWFJweGFFNGktcG5tWFRwdGIwMEM2M0xJcGZCWTBjUXdBTUNxVW54?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
@@ -243,7 +243,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기인디뮤직페스티벌 10월 수원서 개최 - 미디어모현",
+      "title": "경기인디뮤직페스티벌 10월 수원서 개최 - mediamo.co.kr",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBWWXB3YTVoSmRva2ZtWERwMFUxSnVvaGFuYnpzTnZ5OTk0cVVoVWdibkt6OUJab0NHM2JFRGEtZXdjZk5sTUZCbFoxdlNfOHd0bXprdEN0R01XTjFuRlYyRlprclFrVENTQWFr?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
@@ -251,7 +251,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기콘텐츠진흥원, ‘2026 경기인디뮤직페스티벌’ 수원서 개최 - 정필",
+      "title": "경기콘텐츠진흥원, ‘2026 경기인디뮤직페스티벌’ 수원서 개최 - jeongpil.com",
       "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1iVjg3WGNjbmI2N2xIb2hkQ2lpOWc0VElmR011eUZPaUgwX0ZORk81SWNUZnIwTDNCOWIteW5VWk4zLTJiSVpz?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
@@ -307,7 +307,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "퇴근 후, 인천이 무대가 된다…직장인 밴드 경연대회 ‘퇴근 후 락(樂)’ 참가팀 모집 - newsenc.com",
+      "title": "퇴근 후, 인천이 무대가 된다…직장인 밴드 경연대회 ‘퇴근 후 락(樂)’ 참가팀 모집 - 쓰담미디어",
       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE51NUR0UzBMZ2dpUEI0bXg3NkpsaDNiaG1DWlRRN2JMS002NHEyTkFtRHByNlVrbjhTTjg1ZlRGSHhCancyVTBPSXZpS2poN3dlUlI1dmlfem9IYVdqX3hNNHJZY0N1Ym8?oc=5",
       "source": "Google News · 공연 모집",
       "category": "opportunity",
