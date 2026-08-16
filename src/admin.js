@@ -20,20 +20,44 @@ const sections = [
 ];
 const savedContent = loadJson(CONTENT_KEY, {});
 const contentForm = document.querySelector('#content-form');
+const FONT_OPTIONS = [
+  ['Archivo Black', 'Archivo Black · 메탈 제목'],
+  ['Inter', 'Inter · 산세리프'],
+  ['Noto Sans KR', 'Noto Sans KR · 한글 고딕'],
+  ['Noto Serif KR', 'Noto Serif KR · 한글 명조'],
+  ['system-ui', '시스템 기본 글꼴'],
+];
+const fontOptions = (selected) => FONT_OPTIONS.map(([value, label]) => `<option value="${value}" ${selected === value ? 'selected' : ''}>${label}</option>`).join('');
+
 contentForm.innerHTML = sections.map(([id, label, title, body]) => {
   const titleSize = Number(savedContent[id]?.titleSize || 72);
   const bodySize = Number(savedContent[id]?.bodySize || 16);
-  return `<fieldset class="editor-card"><h3>${label}</h3><label>제목<input name="${id}.title" value="${escapeHtml(savedContent[id]?.title || title)}"></label><label>본문<textarea name="${id}.body" rows="4">${escapeHtml(savedContent[id]?.body || body)}</textarea></label><div class="font-controls"><label class="font-control"><span>제목 크기 <b><output for="${id}-title-size">${titleSize}</output>px</b></span><input id="${id}-title-size" name="${id}.titleSize" type="range" min="32" max="128" step="2" value="${titleSize}"></label><label class="font-control"><span>본문 크기 <b><output for="${id}-body-size">${bodySize}</output>px</b></span><input id="${id}-body-size" name="${id}.bodySize" type="range" min="12" max="32" step="1" value="${bodySize}"></label></div></fieldset>`;
+  const titleLineHeight = Number(savedContent[id]?.titleLineHeight || 0.9);
+  const bodyLineHeight = Number(savedContent[id]?.bodyLineHeight || 1.8);
+  const titleFont = savedContent[id]?.titleFont || 'Archivo Black';
+  const bodyFont = savedContent[id]?.bodyFont || 'Inter';
+  return `<fieldset class="editor-card"><h3>${label}</h3><label>제목<input name="${id}.title" value="${escapeHtml(savedContent[id]?.title || title)}"><small>줄을 바꾸려면 입력창에서 Enter를 누르세요.</small></label><label>본문<textarea name="${id}.body" rows="4">${escapeHtml(savedContent[id]?.body || body)}</textarea><small>입력한 줄바꿈이 공개 페이지에 그대로 적용됩니다.</small></label><div class="font-controls"><label class="font-control"><span>제목 글꼴</span><select name="${id}.titleFont">${fontOptions(titleFont)}</select></label><label class="font-control"><span>본문 글꼴</span><select name="${id}.bodyFont">${fontOptions(bodyFont)}</select></label><label class="font-control"><span>제목 크기 <b><output for="${id}-title-size">${titleSize}</output>px</b></span><input id="${id}-title-size" name="${id}.titleSize" type="range" min="32" max="128" step="2" value="${titleSize}"></label><label class="font-control"><span>본문 크기 <b><output for="${id}-body-size">${bodySize}</output>px</b></span><input id="${id}-body-size" name="${id}.bodySize" type="range" min="12" max="32" step="1" value="${bodySize}"></label><label class="font-control"><span>제목 줄간격 <b><output for="${id}-title-line-height">${titleLineHeight}</output></b></span><input id="${id}-title-line-height" name="${id}.titleLineHeight" type="range" min="0.75" max="1.6" step="0.05" value="${titleLineHeight}"></label><label class="font-control"><span>본문 줄간격 <b><output for="${id}-body-line-height">${bodyLineHeight}</output></b></span><input id="${id}-body-line-height" name="${id}.bodyLineHeight" type="range" min="1" max="2.5" step="0.05" value="${bodyLineHeight}"></label></div></fieldset>`;
 }).join('');
 contentForm.addEventListener('input', (event) => {
-  if (event.target.type !== 'range') return;
-  event.target.closest('label')?.querySelector('output')?.replaceChildren(event.target.value);
-  document.querySelector('#content-feedback').textContent = '글자 크기가 변경되었습니다. 저장 버튼을 눌러 적용하세요.';
+  if (event.target.type === 'range') event.target.closest('label')?.querySelector('output')?.replaceChildren(event.target.value);
+  document.querySelector('#content-feedback').textContent = '서식이 변경되었습니다. 저장 버튼을 눌러 공개 페이지에 적용하세요.';
+});
+contentForm.addEventListener('change', () => {
+  document.querySelector('#content-feedback').textContent = '서식이 변경되었습니다. 저장 버튼을 눌러 공개 페이지에 적용하세요.';
 });
 contentForm.addEventListener('submit', (event) => {
   event.preventDefault(); const data = new FormData(contentForm); const content = {};
-  sections.forEach(([id]) => { content[id] = { title: data.get(`${id}.title`), body: data.get(`${id}.body`), titleSize: Number(data.get(`${id}.titleSize`)), bodySize: Number(data.get(`${id}.bodySize`)) }; });
-  saveJson(CONTENT_KEY, content); document.querySelector('#content-feedback').textContent = '공개 페이지 콘텐츠와 글자 크기가 저장되었습니다.';
+  sections.forEach(([id]) => { content[id] = {
+    title: data.get(`${id}.title`),
+    body: data.get(`${id}.body`),
+    titleFont: data.get(`${id}.titleFont`),
+    bodyFont: data.get(`${id}.bodyFont`),
+    titleSize: Number(data.get(`${id}.titleSize`)),
+    bodySize: Number(data.get(`${id}.bodySize`)),
+    titleLineHeight: Number(data.get(`${id}.titleLineHeight`)),
+    bodyLineHeight: Number(data.get(`${id}.bodyLineHeight`)),
+  }; });
+  saveJson(CONTENT_KEY, content); document.querySelector('#content-feedback').textContent = '공개 페이지 콘텐츠와 글꼴 서식이 저장되었습니다.';
 });
 
 const songForm = document.querySelector('#song-form');

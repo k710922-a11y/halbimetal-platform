@@ -14,8 +14,15 @@ try {
   document.querySelectorAll('[data-content]').forEach((element) => {
     const [section, field] = element.dataset.content.split('.');
     if (content[section]?.[field]) element.textContent = content[section][field];
-    const size = content[section]?.[`${field}Size`];
+    const settings = content[section] || {};
+    const size = settings[`${field}Size`];
+    const lineHeight = settings[`${field}LineHeight`];
+    const font = settings[`${field}Font`];
+    const allowedFonts = ['Archivo Black', 'Inter', 'Noto Sans KR', 'Noto Serif KR', 'system-ui'];
     if (Number.isFinite(Number(size))) element.style.fontSize = `${Number(size)}px`;
+    if (Number.isFinite(Number(lineHeight))) element.style.lineHeight = String(Number(lineHeight));
+    if (allowedFonts.includes(font)) element.style.fontFamily = font === 'system-ui' ? 'system-ui, sans-serif' : `"${font}", sans-serif`;
+    element.style.whiteSpace = 'pre-line';
   });
 } catch { /* Keep bundled defaults when local content is invalid. */ }
 
