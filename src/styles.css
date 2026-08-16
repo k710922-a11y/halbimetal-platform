@@ -31,3 +31,10 @@
 @media(max-width:900px){#about{grid-template-columns:1fr}.about-band{width:100%;box-shadow:10px 10px 0 rgba(9,9,9,.12)}}
 @media(max-width:560px){#about{gap:2rem}.about-band{margin-right:10px}}
 
+
+
+/* Member portrait visibility fix: keep the complete bust above the label. */
+.member-image{inset:.8rem .8rem 0;display:block;overflow:hidden}
+.member-image img{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.member-image::after{z-index:2;pointer-events:none}
+.member-role{z-index:3}
