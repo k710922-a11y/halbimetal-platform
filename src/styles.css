@@ -40,4 +40,4 @@
 .member-role{z-index:3}
 
 /* Raise the wider second-guitar cutout so its hairline aligns with the other top-row members. */
-.member-card.second-guitar .member-image img{object-position:center center}
+.member-card.second-guitar .member-image img{object-position:center calc(50% - 10px)}
