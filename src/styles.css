@@ -30,3 +30,6 @@
 .about-band img{display:block;width:100%;height:auto;aspect-ratio:1100/531;object-fit:cover}
 @media(max-width:900px){#about{grid-template-columns:1fr}.about-band{width:100%;box-shadow:10px 10px 0 rgba(9,9,9,.12)}}
 @media(max-width:560px){#about{gap:2rem}.about-band{margin-right:10px}}
+
+/* Keep the naturally proportioned second guitarist visually aligned with the other portraits. */
+.member-card.second-guitar .member-image img{width:106%;height:106%}
