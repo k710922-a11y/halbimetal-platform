@@ -20,11 +20,20 @@ const sections = [
 ];
 const savedContent = loadJson(CONTENT_KEY, {});
 const contentForm = document.querySelector('#content-form');
-contentForm.innerHTML = sections.map(([id, label, title, body]) => `<fieldset class="editor-card"><h3>${label}</h3><label>제목<input name="${id}.title" value="${escapeHtml(savedContent[id]?.title || title)}"></label><label>본문<textarea name="${id}.body" rows="4">${escapeHtml(savedContent[id]?.body || body)}</textarea></label></fieldset>`).join('');
+contentForm.innerHTML = sections.map(([id, label, title, body]) => {
+  const titleSize = Number(savedContent[id]?.titleSize || 72);
+  const bodySize = Number(savedContent[id]?.bodySize || 16);
+  return `<fieldset class="editor-card"><h3>${label}</h3><label>제목<input name="${id}.title" value="${escapeHtml(savedContent[id]?.title || title)}"></label><label>본문<textarea name="${id}.body" rows="4">${escapeHtml(savedContent[id]?.body || body)}</textarea></label><div class="font-controls"><label class="font-control"><span>제목 크기 <b><output for="${id}-title-size">${titleSize}</output>px</b></span><input id="${id}-title-size" name="${id}.titleSize" type="range" min="32" max="128" step="2" value="${titleSize}"></label><label class="font-control"><span>본문 크기 <b><output for="${id}-body-size">${bodySize}</output>px</b></span><input id="${id}-body-size" name="${id}.bodySize" type="range" min="12" max="32" step="1" value="${bodySize}"></label></div></fieldset>`;
+}).join('');
+contentForm.addEventListener('input', (event) => {
+  if (event.target.type !== 'range') return;
+  event.target.closest('label')?.querySelector('output')?.replaceChildren(event.target.value);
+  document.querySelector('#content-feedback').textContent = '글자 크기가 변경되었습니다. 저장 버튼을 눌러 적용하세요.';
+});
 contentForm.addEventListener('submit', (event) => {
   event.preventDefault(); const data = new FormData(contentForm); const content = {};
-  sections.forEach(([id]) => { content[id] = { title: data.get(`${id}.title`), body: data.get(`${id}.body`) }; });
-  saveJson(CONTENT_KEY, content); document.querySelector('#content-feedback').textContent = '공개 페이지 콘텐츠가 저장되었습니다.';
+  sections.forEach(([id]) => { content[id] = { title: data.get(`${id}.title`), body: data.get(`${id}.body`), titleSize: Number(data.get(`${id}.titleSize`)), bodySize: Number(data.get(`${id}.bodySize`)) }; });
+  saveJson(CONTENT_KEY, content); document.querySelector('#content-feedback').textContent = '공개 페이지 콘텐츠와 글자 크기가 저장되었습니다.';
 });
 
 const songForm = document.querySelector('#song-form');

@@ -14,6 +14,8 @@ try {
   document.querySelectorAll('[data-content]').forEach((element) => {
     const [section, field] = element.dataset.content.split('.');
     if (content[section]?.[field]) element.textContent = content[section][field];
+    const size = content[section]?.[`${field}Size`];
+    if (Number.isFinite(Number(size))) element.style.fontSize = `${Number(size)}px`;
   });
 } catch { /* Keep bundled defaults when local content is invalid. */ }
 
