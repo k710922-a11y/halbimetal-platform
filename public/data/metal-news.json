@@ -1,6 +1,30 @@
 {
-  "generatedAt": "2026-08-21T07:10:54.810Z",
+  "generatedAt": "2026-08-21T13:14:16.822Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOlJPQiBa",
+      "title": "ROB ZOMBIE Shares Music Video For &#039;Black Rat Coffin&#039; From &#039;The Great Satan&#039; Album",
+      "url": "https://blabbermouth.net/news/rob-zombie-shares-music-video-for-black-rat-coffin-from-the-great-satan-album",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-21T12:21:56.000Z"
+    },
+    {
+      "id": "TWV0YWwgSW5qZWN0aW9uOlRo",
+      "title": "The Weekly Injection: New Releases From CHELSEA WOLFE, DARK FUNERAL, and More Out This Week – 8/21",
+      "url": "https://metalinjection.net/upcoming-releases/heavy-new-releases/the-weekly-injection-new-releases-from-chelsea-wolfe-dark-funeral-and-more-out-this-week-8-21",
+      "source": "Metal Injection",
+      "category": "metal",
+      "publishedAt": "2026-08-21T12:13:16.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOk5JQ0tF",
+      "title": "NICKELBACK Shares New Single &#039;Leave Me Behind&#039; From Upcoming &#039;Everything Under The Sun&#039; Album",
+      "url": "https://blabbermouth.net/news/nickelback-shares-new-single-leave-me-behind-from-upcoming-everything-under-the-sun-album",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-21T12:11:40.000Z"
+    },
     {
       "id": "QmxhYmJlcm1vdXRoOk5FVEZM",
       "title": "NETFLIX On DEMON HUNTER&#039;s Lawsuit Over &#039;KPop Demon Hunters&#039; Trademark: &#039;These Allegations Are Without Merit&#039;",
@@ -138,30 +162,6 @@
       "publishedAt": "2026-08-20T14:47:36.000Z"
     },
     {
-      "id": "QmxhYmJlcm1vdXRoOlNOT1Qg",
-      "title": "SNOT Signs Record Deal With BLKIIBLK; New Studio Album Coming In Summer 2027",
-      "url": "https://blabbermouth.net/news/snot-signs-record-deal-with-blkiiblk-new-studio-album-coming-in-summer-2027",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-08-20T14:24:20.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOlNlZSBQ",
-      "title": "See Pro-Shot Video Of VIO-LENCE&#039;s Entire August 2026 Concert In Moscow, Russia",
-      "url": "https://blabbermouth.net/news/see-pro-shot-video-of-vio-lences-entire-august-2026-concert-in-moscow-russia",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-08-20T14:02:27.000Z"
-    },
-    {
-      "id": "TWV0YWwgSW5qZWN0aW9uOktF",
-      "title": "KENNY HICKEY of TYPE O NEGATIVE Deep Dives into 30 Years of &#039;October Rust&#039;",
-      "url": "https://metalinjection.net/video/kenny-hickey-of-type-o-negative-talks-october-rust-30-years-later",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-08-20T14:00:00.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "동구 2026 밴드 라이브 어택 Vol. 5 행사 개최 - 더뉴스코리아",
       "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBFZ1dONENHOGJCZlFILW9QV18yYlNVdGVtellIUlh5bUNEWnlSY2diZW84NUdCQm82ejJ0UFRmZ0xVVTBNWlNIdVRncjh3UWhfRWpia0dR?oc=5",
@@ -224,14 +224,6 @@
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-07-27T13:11:41.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "성남산업진흥재단, 'GXG 2026 게임음악 경연대회' 참가자 모집 - 매일일보",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE16QXVSWGJaZ05NZ3daa0JRVmp3WWg0TlZYeGRCcFdCN2hvanpuZUhtV0h3dWpIRDB3dnBJRUh3S0ZrdzdBcW14a3RJQ0lwRzFsRXlXZTlScG54RExkOUVPeXZjdVU?oc=5",
-      "source": "Google News · 공연 모집",
-      "category": "opportunity",
-      "publishedAt": "2026-07-08T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
@@ -320,6 +312,14 @@
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-05-22T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
+      "title": "‘봄꽃 야행’ 테마로 돌아온 화순 봄꽃 축제, 4월 17일 개막 - newskorea.ne.kr",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9MSmVZZ0lwT3dtRkFjNWdnSWFFZlkxYl9UTGd1dUcxLXNkVm11MVdvbXl0MGFPa1pUV3ZNZjQzbkhQUEwyMnVGQWY1ZzIzd3ZQLUhrR0tHSlJZRFFGdy1nMEFVQmtuRlVCd2hMSDRR?oc=5",
+      "source": "Google News · 밴드 공고",
+      "category": "opportunity",
+      "publishedAt": "2026-04-17T07:00:00.000Z"
     }
   ],
   "errors": []
