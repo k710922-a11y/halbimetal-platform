@@ -1,6 +1,22 @@
 {
-  "generatedAt": "2026-08-24T07:31:37.247Z",
+  "generatedAt": "2026-08-24T13:17:11.214Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOlNMQURF",
+      "title": "SLADE Guitarist DAVE HILL Shares &#039;She Had A Troubled Heart&#039; Single From Upcoming &#039;Dirty Foot Lane&#039; Solo Album",
+      "url": "https://blabbermouth.net/news/slade-guitarist-dave-hill-shares-she-had-a-troubled-heart-single-from-upcoming-dirty-foot-lane-solo-album",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-24T12:27:12.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOldhdGNo",
+      "title": "Watch: GEORGE LYNCH Joins DOKKEN On Stage In St. Petersburg, Florida",
+      "url": "https://blabbermouth.net/news/watch-george-lynch-joins-dokken-on-stage-in-st-petersburg-florida",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-08-24T12:02:46.000Z"
+    },
     {
       "id": "QmxhYmJlcm1vdXRoOktBTUVM",
       "title": "KAMELOT&#039;s TOMMY KAREVIK Admits It Was A &#039;Challenge&#039; To Replace ROY KHAN, But Says &#039;Now It Feels Like My Band&#039;",
@@ -146,22 +162,6 @@
       "publishedAt": "2026-08-22T17:55:23.000Z"
     },
     {
-      "id": "QmxhYmJlcm1vdXRoOkZvcm1l",
-      "title": "Former AC/DC Drummer CHRIS SLADE Announces His Retirement From Drumming: &#039;With A Heavy Heart, It&#039;s Bye For Now&#039;",
-      "url": "https://blabbermouth.net/news/former-ac-dc-drummer-chris-slade-announces-his-retirement-from-drumming-with-a-heavy-heart-its-bye-for-now",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-08-22T17:38:56.000Z"
-    },
-    {
-      "id": "TWV0YWwgSW5qZWN0aW9uOldB",
-      "title": "WATCH: WORM Goes Full 1991 VHS Aesthetic For KEXP Performance",
-      "url": "https://metalinjection.net/news/watch-worm-goes-full-1991-vhs-aesthetic-for-kexp-performance",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-08-22T17:17:51.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "동구 2026 밴드 라이브 어택 Vol. 5 행사 개최 - 시사일보",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5zYlBra3N6bHE5cHE0eUpVYi1qOW9xN3RLYlU4eXJPYkdhRWUycUNLNUdGcUtUdjVZT3ZtUVpveXFzWC04REItcUNRSFhQeXNzcW85VGNkQmdXUQ?oc=5",
@@ -192,14 +192,6 @@
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-08-12T03:06:01.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "동작구, '제1회 청년 창작 문화 페스티벌' 참가자 모집 - BBS불교방송",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4zT0JLNXNSeFRaNFI1Vkk1Qm9wMEUxc0lGYmZiSTJMSThkYkVMYVN3WFdNYjVCSDkwclRxVHh2NDY1MWQ2dWlvbFBCb0RlSmx5VGZ6dm51ZHM5OVVLNkhJbHJOQ3pQWmJ4dGk4?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-08-11T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
@@ -320,6 +312,14 @@
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-04-17T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
+      "title": "퇴근 후, 인천이 무대가 된다…직장인 밴드 경연대회 ‘퇴근 후 락(樂)’ 참가팀 모집 - 쓰담미디어",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE51NUR0UzBMZ2dpUEI0bXg3NkpsaDNiaG1DWlRRN2JMS002NHEyTkFtRHByNlVrbjhTTjg1ZlRGSHhCancyVTBPSXZpS2poN3dlUlI1dmlfem9IYVdqX3hNNHJZY0N1Ym8?oc=5",
+      "source": "Google News · 공연 모집",
+      "category": "opportunity",
+      "publishedAt": "2026-04-13T07:00:00.000Z"
     }
   ],
   "errors": []
