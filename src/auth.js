@@ -55,11 +55,14 @@ function fatal(title, body) {
  * 세션이 있으면 즉시 반환하고, 없으면 로그인 화면을 띄운 뒤 성공할 때까지 기다립니다.
  */
 export async function requireLogin(subtitle = '') {
-  if (!isConfigured) {
+  // supabase 가 null 이면 값이 비었거나 주소 형식이 잘못된 것입니다.
+  // 이 상태로 로그인 창을 띄우면 누르는 순간 터지므로 여기서 멈춥니다.
+  if (!isConfigured || !supabase) {
     return fatal(
       '서버 설정이 없습니다',
       'Coolify 환경변수 <code>VITE_SUPABASE_URL</code> 과 <code>VITE_SUPABASE_ANON_KEY</code> 를 '
-      + '<b>Build Variable 로 체크해서</b> 넣은 뒤 다시 배포해주세요.',
+      + '<b>Build Variable 로 체크해서</b> 넣은 뒤 다시 배포해주세요. '
+      + '주소는 <code>https://</code> 로 시작하는 전체 주소여야 합니다.',
     );
   }
 
