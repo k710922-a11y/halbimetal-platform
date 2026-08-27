@@ -1,0 +1,113 @@
+# =============================================================================
+# GitHub Pages 를 "리다이렉트 전용" 으로 전환
+#
+# 이 파일이 기존 Pages 배포 워크플로우(.github/workflows/deploy.yml)를 **대체**합니다.
+# 파일명이 같으므로 그냥 덮어쓰면 됩니다. 새 파일을 추가하고 옛 파일을 남겨두면
+# 두 워크플로우가 번갈아 배포해서 사이트가 오락가락합니다.
+#
+# 하는 일:
+#   Vite 빌드를 더 이상 하지 않고, 리다이렉트 페이지 한 장만 Pages 에 올립니다.
+#   k710922-a11y.github.io/halbimetal-platform/... 로 들어온 방문자를
+#   halbimetal.jawsweb.site/... 의 같은 경로로 넘겨줍니다.
+#
+#   index.html 과 404.html 을 같은 내용으로 올리는 게 요령입니다.
+#   Pages 는 없는 경로에 404.html 을 돌려주므로, /admin 같은 깊은 링크도
+#   전부 이 페이지를 거쳐 새 주소로 넘어갑니다.
+#
+# 덤으로: 기존 deploy.yml 은 `npm ci` 를 돌렸기 때문에, 이번에 의존성을 추가하면서
+#   lock 파일이 어긋나면 실패했을 겁니다. 이제 npm 을 아예 쓰지 않으니 그 걱정도 없습니다.
+#   (test.yml 은 계속 npm ci 를 쓰므로 package-lock.json 도 함께 올려야 합니다)
+# =============================================================================
+name: Redirect old Pages URL to jawsweb.site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포가 겹치지 않게 (진행 중인 건 끝까지 두고 새 것을 대기시킴)
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 리다이렉트 페이지 생성
+        run: |
+          mkdir -p out
+          cat > out/index.html <<'HTML'
+          <!doctype html>
+          <html lang="ko">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>HALBI METAL — 주소가 바뀌었습니다</title>
+          <link rel="canonical" href="https://halbimetal.jawsweb.site/">
+          <meta name="robots" content="noindex">
+          <!-- 자바스크립트가 꺼져 있어도 3초 뒤 넘어갑니다 -->
+          <meta http-equiv="refresh" content="3; url=https://halbimetal.jawsweb.site/">
+          <style>
+            body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+                 background:#0a0a0a;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+                 text-align:center;padding:24px;box-sizing:border-box}
+            .box{max-width:32rem}
+            h1{font-size:1.4rem;margin:0 0 .75rem;letter-spacing:.02em}
+            p{color:#a3a3a3;line-height:1.7;margin:0 0 1.5rem;font-size:.95rem}
+            a{display:inline-block;background:#d4ff00;color:#0a0a0a;text-decoration:none;
+              padding:.7rem 1.4rem;font-weight:700;letter-spacing:.03em}
+            a:hover{opacity:.85}
+          </style>
+          </head>
+          <body>
+            <div class="box">
+              <h1>새 주소로 이동합니다</h1>
+              <p>HALBI METAL 은 <strong>halbimetal.jawsweb.site</strong> 로 옮겼습니다.<br>
+                 잠시 후 자동으로 넘어갑니다. 넘어가지 않으면 아래를 눌러주세요.</p>
+              <a id="go" href="https://halbimetal.jawsweb.site/">새 사이트로 이동</a>
+            </div>
+          <script>
+          (function () {
+            // Pages 경로 앞의 /halbimetal-platform 를 떼고 나머지 경로를 그대로 넘깁니다.
+            //   /halbimetal-platform/hub?tab=2  →  https://halbimetal.jawsweb.site/hub?tab=2
+            var base = '/halbimetal-platform';
+            var p = location.pathname;
+            if (p.indexOf(base) === 0) p = p.slice(base.length);
+            if (!p || p.charAt(0) !== '/') p = '/' + p;
+            var url = 'https://halbimetal.jawsweb.site' + p + location.search + location.hash;
+            var a = document.getElementById('go');
+            if (a) a.href = url;
+            // replace 를 써서 뒤로가기 무한루프를 막습니다
+            location.replace(url);
+          })();
+          </script>
+          </body>
+          </html>
+          HTML
+
+          # Pages 는 없는 경로에 404.html 을 돌려줍니다.
+          # 같은 내용을 넣어두면 깊은 링크도 전부 새 주소로 넘어갑니다.
+          cp out/index.html out/404.html
+
+          # 검색엔진이 옛 주소를 더 긁지 않도록
+          printf 'User-agent: *\nDisallow: /\n' > out/robots.txt
+
+          echo "생성된 파일:"; ls -la out/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
