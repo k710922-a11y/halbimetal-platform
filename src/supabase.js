@@ -18,16 +18,26 @@ export const ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 export const isConfigured = Boolean(SUPABASE_URL && ANON_KEY);
 
-// 설정이 없으면 createClient 가 예외를 던지므로 null 로 두고, 화면에서 안내합니다.
-export const supabase = isConfigured
-  ? createClient(SUPABASE_URL, ANON_KEY, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      storageKey: 'halbi.auth',
-    },
-  })
-  : null;
+// 설정이 없거나 주소가 잘못되면 createClient 가 예외를 던집니다.
+// 그대로 두면 모듈이 통째로 죽어서 화면이 백지가 됩니다.
+// null 로 떨어뜨려 두면 auth.js 가 "서버 설정이 없습니다" 안내를 띄웁니다.
+function makeClient() {
+  if (!isConfigured) return null;
+  try {
+    return createClient(SUPABASE_URL, ANON_KEY, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        storageKey: 'halbi.auth',
+      },
+    });
+  } catch (error) {
+    console.error('Supabase 클라이언트를 만들지 못했습니다. VITE_SUPABASE_URL 을 확인하세요.', error);
+    return null;
+  }
+}
+
+export const supabase = makeClient();
 
 export const BUCKETS = {
   audio: 'halbi-audio',
