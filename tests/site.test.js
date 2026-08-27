@@ -5,6 +5,9 @@ import { readFile } from 'node:fs/promises';
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const adminHtml = await readFile(new URL('../admin.html', import.meta.url), 'utf8');
 const hubHtml = await readFile(new URL('../hub.html', import.meta.url), 'utf8');
+const adminJs = await readFile(new URL('../src/admin.js', import.meta.url), 'utf8');
+const hubJs = await readFile(new URL('../src/hub.js', import.meta.url), 'utf8');
+const dbJs = await readFile(new URL('../src/db.js', import.meta.url), 'utf8');
 
 test('brand and core message are present', () => {
   assert.match(html, /HALBI METAL/);
@@ -36,8 +39,9 @@ test('admin provides content, song, schedule and notice management', () => {
   for (const id of ['content-form', 'song-form', 'schedule-form', 'notice-form']) assert.match(adminHtml, new RegExp(`id="${id}"`));
 });
 
-test('admin song database includes five-item pagination', () => {
+test('admin song database pages ten rows at a time', () => {
   assert.match(adminHtml, /id="admin-song-pagination"/);
+  assert.match(adminJs, /const ADMIN_PAGE_SIZE = 10;/);
 });
 
 test('public repertoire contains the agreed five songs', () => {
@@ -49,7 +53,7 @@ test('public line-up presents all six member positions and portraits', () => {
     assert.match(html, new RegExp(role));
   }
 
-  for (const portrait of ['vocal.webp', 'lead-guitar.webp', 'second-guitar.webp', 'bass.webp', 'keyboard.webp', 'drums.webp']) {
+  for (const portrait of ['vocal-transparent.webp', 'lead-guitar-transparent.webp', 'second-guitar-transparent.webp', 'bass-transparent.webp', 'keyboard-transparent.webp', 'drums-transparent.webp']) {
     assert.match(html, new RegExp(`members/${portrait}`));
   }
 });
@@ -77,9 +81,36 @@ test('each rehearsal list has ten-item pagination controls', () => {
   assert.match(hubHtml, /id="wishlist-pagination"/);
 });
 
-test('song uploads store metadata without BPM or an audio player', () => {
+test('song form uploads audio, cover art and tab sheets', () => {
   assert.doesNotMatch(adminHtml, /name="bpm"/);
   assert.match(adminHtml, /id="audio-metadata-feedback"/);
+  assert.match(adminHtml, /name="audio" type="file"/);
+  assert.match(adminHtml, /name="cover" type="file"/);
+  assert.match(adminHtml, /name="tabs" type="file"[^>]*multiple/);
+  assert.match(adminHtml, /id="upload-progress"/);
+});
+
+test('songs live on the server, not in the browser', () => {
+  assert.doesNotMatch(dbJs, /indexedDB/);
+  assert.match(dbJs, /from '\.\/supabase\.js'/);
+  assert.doesNotMatch(adminHtml, /브라우저 로컬 DB/);
+  assert.match(adminHtml, /자체 호스팅 서버 DB/);
+});
+
+test('private audio is played through short-lived signed urls', () => {
+  assert.match(dbJs, /createSignedUrl/);
+  assert.match(adminHtml, /id="admin-player"/);
+  assert.match(hubHtml, /id="hub-player"/);
+});
+
+test('both member pages require a login before reading data', () => {
+  for (const source of [adminJs, hubJs]) assert.match(source, /requireLogin\(/);
+});
+
+test('no full storage url is ever written into the database', () => {
+  // 서버 이전에서 배운 것: URL 을 통째로 넣으면 도메인이 바뀔 때 DB 를 전부 고쳐야 합니다.
+  assert.doesNotMatch(adminJs, /audio_path: *`\$\{/);
+  assert.match(dbJs, /버킷 안의 경로만/);
 });
 
 test('member hub includes the automated metal news and gig board', () => {

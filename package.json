@@ -1,7 +1,7 @@
 {
   "name": "halbimetal-platform",
   "private": true,
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "vite": "^7.1.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.4"
   }
 }

@@ -27,12 +27,29 @@ WORKDIR /app
 
 # 의존성 먼저 복사 → 소스만 바뀐 배포에서는 이 레이어가 캐시돼 빌드가 빨라집니다
 COPY package.json package-lock.json ./
-RUN npm ci
+# npm ci 대신 npm install 을 씁니다.
+# GitHub 웹 편집기로는 package-lock.json 을 다시 만들 수 없어서,
+# package.json 과 lock 이 어긋나면 npm ci 는 그 자리에서 실패합니다.
+RUN npm install --no-audit --no-fund
 
 COPY . .
 
 # 혹시 상위 환경에서 흘러들어올 경우를 대비해 명시적으로 비웁니다
 ENV GITHUB_REPOSITORY=""
+
+# ---- Supabase 접속 정보 (빌드 시점에 코드로 들어갑니다) ----
+# Vite 는 import.meta.env.VITE_* 를 빌드할 때 문자열로 박아 넣습니다.
+# 그래서 Coolify 환경변수에서 이 둘의 "Build Variable" 을 반드시 켜야 합니다.
+# 런타임 변수로만 넣으면 값이 빈 채로 빌드되어 로그인 화면이 뜨지 않습니다.
+ARG VITE_SUPABASE_URL
+ARG VITE_SUPABASE_ANON_KEY
+ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
+ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+
+# 값이 비면 빌드는 성공해도 사이트는 못 씁니다. 여기서 미리 잡습니다.
+RUN test -n "$VITE_SUPABASE_URL" || (echo "VITE_SUPABASE_URL 이 비어 있습니다. Coolify 환경변수에서 Build Variable 을 켜주세요." && exit 1)
+RUN test -n "$VITE_SUPABASE_ANON_KEY" || (echo "VITE_SUPABASE_ANON_KEY 이 비어 있습니다. Coolify 환경변수에서 Build Variable 을 켜주세요." && exit 1)
+
 RUN npm run build
 
 # 빌드 결과 검증 — 세 페이지가 다 나왔는지 확인하고, 없으면 여기서 실패시킵니다
