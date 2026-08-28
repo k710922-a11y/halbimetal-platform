@@ -1,12 +1,24 @@
 .repertoire-board{overflow:hidden}
-.repertoire-board .setlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
-.repertoire-board .setlist-row{grid-template-columns:44px minmax(0,1fr);align-items:start;border:1px solid #292929;padding:1rem}
-.repertoire-board .track-title{min-width:0}
-.repertoire-board .track-title b,.repertoire-board .track-title small{overflow-wrap:anywhere}
-.repertoire-board .track-meta{grid-column:2}
+/* 한 줄에 카드 3개. 화면이 좁아지면 2개 → 1개로 줄입니다. */
+.repertoire-board .setlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.repertoire-board .setlist .empty{grid-column:1/-1}
+/* 카드 안은 그리드가 아니라 flex 입니다.
+   커버 이미지가 있을 때와 없을 때 자식 수가 달라지는데, 그리드로 두면
+   칸 수가 안 맞아 마지막 자식(재생 버튼)이 다음 줄로 밀려 내려갑니다. */
+.repertoire-board .setlist-row{display:flex;align-items:flex-start;gap:.7rem;border:1px solid #292929;padding:1rem}
+.repertoire-board .track-index{flex:0 0 auto;font-size:1.1rem;line-height:1.2}
+.repertoire-board .track-cover{flex:0 0 auto}
+.repertoire-board .track-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:.25rem}
+/* 제목과 재생 버튼을 같은 줄에 */
+.repertoire-board .track-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.repertoire-board .track-head b{min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.repertoire-board .track-head .play-button{flex:0 0 auto}
+.repertoire-board .track-main small{color:#777;overflow-wrap:anywhere}
+.repertoire-board .track-meta{font-size:.7rem}
 .list-pagination{display:flex;justify-content:flex-end;align-items:center;gap:.8rem;padding-top:1rem}
 .list-pagination button{background:transparent;color:#fff;border:1px solid #555;padding:.55rem .8rem;cursor:pointer;font-size:.7rem}
 .list-pagination button:hover:not(:disabled),.list-pagination button:focus-visible{background:var(--acid);color:#090909;border-color:var(--acid)}
 .list-pagination button:disabled{opacity:.3;cursor:not-allowed}
 .list-pagination span{min-width:42px;text-align:center;color:var(--acid);font-size:.68rem;font-weight:800}
-@media(max-width:800px){.repertoire-board .setlist{grid-template-columns:1fr}.repertoire-board .setlist-row{grid-template-columns:40px minmax(0,1fr)}.repertoire-board .track-meta{grid-column:2;width:100%;max-width:260px}.list-pagination{justify-content:center}}
+@media(max-width:1200px){.repertoire-board .setlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.repertoire-board .setlist{grid-template-columns:1fr}.list-pagination{justify-content:center}}
