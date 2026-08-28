@@ -14,7 +14,8 @@ const dateFmt = new Intl.DateTimeFormat('ko-KR', { month: 'long', day: 'numeric'
 function updateClock() { const now = new Date(); document.querySelector('#today-label').textContent = new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' }).format(now); document.querySelector('#clock-time').textContent = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }); } updateClock(); setInterval(updateClock, 30000);
 const schedule = loadJson(SCHEDULE_KEY, {}); if (schedule.date) { document.querySelector('#rehearsal-date').textContent = dateFmt.format(new Date(schedule.date)); } document.querySelector('#rehearsal-venue').textContent = schedule.venue || '장소를 등록해주세요.'; document.querySelector('#rehearsal-note').textContent = schedule.note || '';
 
-const PAGE_SIZE = 10;
+// 카드가 한 줄에 3개 → 3줄이면 9곡. 그 이상이면 페이징이 나옵니다.
+const PAGE_SIZE = 9;
 const sessionPages = { vocal: 1, wishlist: 1 };
 const sessionSongs = { vocal: [], wishlist: [] };
 const player = document.querySelector('#hub-player');
@@ -24,12 +25,20 @@ function songRows(songs, startIndex, emptyMessage) {
   return songs.map((song, i) => {
     const cover = publicUrl(BUCKETS.cover, song.cover_path);
     const tabs = (song.tab_paths || []).map((path, index) => `<a href="${publicUrl(BUCKETS.tab, path)}" target="_blank" rel="noopener noreferrer">악보${index + 1}</a>`).join(' ');
+    // 재생 버튼은 제목과 같은 줄(.track-head)에 둡니다.
+    // 예전처럼 행의 마지막 자식으로 두면 그리드가 다음 줄로 밀어내서 제목 '아래'에 붙습니다.
+    const play = song.audio_path
+      ? `<button type="button" class="play-button" data-play="${song.id}" aria-label="${esc(song.title)} 재생">▶</button>`
+      : '<span class="play-button play-button--empty" aria-hidden="true">—</span>';
     return `<div class="setlist-row">
       <span class="track-index">${String(startIndex + i + 1).padStart(2, '0')}</span>
       ${cover ? `<img class="track-cover" src="${cover}" alt="" loading="lazy">` : ''}
-      <div class="track-title"><b>${esc(song.title)}</b><small>${esc(song.artist)}${song.album ? ` · ${esc(song.album)}` : ''}</small>${tabs ? `<span class="tab-links">${tabs}</span>` : ''}</div>
-      <span class="track-meta">${esc(song.song_key || '—')} · ${formatDuration(song.duration)}${song.audio_size ? ` · ${formatBytes(song.audio_size)}` : ''}</span>
-      ${song.audio_path ? `<button type="button" class="play-button" data-play="${song.id}">▶</button>` : '<span class="play-button play-button--empty">—</span>'}
+      <div class="track-main">
+        <div class="track-head"><b>${esc(song.title)}</b>${play}</div>
+        <small>${esc(song.artist)}${song.album ? ` · ${esc(song.album)}` : ''}</small>
+        <span class="track-meta">${esc(song.song_key || '—')} · ${formatDuration(song.duration)}${song.audio_size ? ` · ${formatBytes(song.audio_size)}` : ''}</span>
+        ${tabs ? `<span class="tab-links">${tabs}</span>` : ''}
+      </div>
     </div>`;
   }).join('') || `<p class="empty">${emptyMessage}</p>`;
 }
