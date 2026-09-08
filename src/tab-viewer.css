@@ -1,0 +1,245 @@
+/* TAB 악보 미리보기 팝업 — Hub / Admin 공용 */
+
+.tab-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: rgba(4, 4, 4, 0.86);
+  backdrop-filter: blur(2px);
+}
+
+.tab-viewer[hidden] {
+  display: none;
+}
+
+.tab-viewer-card {
+  display: flex;
+  flex-direction: column;
+  width: min(1040px, 100%);
+  max-height: 100%;
+  background: #0b0b0b;
+  border: 1px solid #2b2b2b;
+}
+
+.tab-viewer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem 0.9rem;
+  border-bottom: 1px solid #232323;
+}
+
+.tab-viewer-head .kicker {
+  margin: 0 0 0.2rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--acid, #d4ff00);
+}
+
+.tab-viewer-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tab-viewer-close {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #3a3a3a;
+  background: transparent;
+  color: #ddd;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tab-viewer-close:hover,
+.tab-viewer-close:focus-visible {
+  border-color: var(--acid, #d4ff00);
+  color: var(--acid, #d4ff00);
+}
+
+/* 악기 카테고리 탭 */
+.tab-viewer-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.8rem 1.3rem;
+  border-bottom: 1px solid #232323;
+}
+
+.tab-viewer-parts button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #333;
+  background: transparent;
+  color: #c9c9c9;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.tab-viewer-parts button i {
+  font-style: normal;
+  font-size: 0.62rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #262626;
+  color: #bcbcbc;
+}
+
+.tab-viewer-parts button:hover {
+  border-color: #6f8600;
+  color: #fff;
+}
+
+.tab-viewer-parts button[aria-selected='true'] {
+  border-color: var(--acid, #d4ff00);
+  background: var(--acid, #d4ff00);
+  color: #090909;
+  font-weight: 800;
+}
+
+.tab-viewer-parts button[aria-selected='true'] i {
+  background: rgba(9, 9, 9, 0.25);
+  color: #090909;
+}
+
+/* 미리보기 영역 */
+.tab-viewer-stage {
+  flex: 1;
+  min-height: 320px;
+  overflow: auto;
+  padding: 1rem 1.3rem;
+  background: #101010;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tab-viewer-stage img {
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.tab-viewer-stage iframe {
+  width: 100%;
+  height: min(70vh, 720px);
+  border: 0;
+  background: #fff;
+}
+
+.tab-viewer-stage .tab-viewer-fallback {
+  align-self: center;
+  text-align: center;
+  color: #9a9a9a;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.tab-viewer-stage .tab-viewer-empty {
+  align-self: center;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+/* 같은 파트에 여러 장일 때 */
+.tab-viewer-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.7rem 1.3rem 0;
+}
+
+.tab-viewer-pages button {
+  min-width: 34px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #333;
+  background: transparent;
+  color: #bbb;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.tab-viewer-pages button[aria-current='true'] {
+  border-color: var(--acid, #d4ff00);
+  color: var(--acid, #d4ff00);
+}
+
+.tab-viewer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.9rem 1.3rem;
+  border-top: 1px solid #232323;
+}
+
+.tab-viewer-foot .tab-viewer-name {
+  min-width: 0;
+  color: #8f8f8f;
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.tab-viewer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab-viewer-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #3a3a3a;
+  color: #ddd;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+
+.tab-viewer-actions a.primary {
+  border-color: var(--acid, #d4ff00);
+  background: var(--acid, #d4ff00);
+  color: #090909;
+  font-weight: 800;
+}
+
+.tab-viewer-actions a:hover,
+.tab-viewer-actions a:focus-visible {
+  border-color: var(--acid, #d4ff00);
+  color: var(--acid, #d4ff00);
+}
+
+.tab-viewer-actions a.primary:hover,
+.tab-viewer-actions a.primary:focus-visible {
+  color: #090909;
+  filter: brightness(1.08);
+}
+
+@media (max-width: 800px) {
+  .tab-viewer {
+    padding: 0;
+  }
+
+  .tab-viewer-card {
+    height: 100%;
+    max-height: none;
+    border: 0;
+  }
+
+  .tab-viewer-stage iframe {
+    height: 60vh;
+  }
+}

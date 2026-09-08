@@ -5,8 +5,8 @@ import './news-board.css';
 import './schedule-feedback.css';
 import './song-library.css';
 import './tab-sheet.css';
-import { BUCKETS, downloadUrl, fetchAllSongs, formatBytes, loadJson, publicUrl, saveJson, signedAudioUrl } from './db.js';
-import { groupTabs, tabFileName } from './tabs.js';
+import { BUCKETS, fetchAllSongs, formatBytes, loadJson, publicUrl, saveJson, signedAudioUrl } from './db.js';
+import { openTabViewer } from './tab-viewer.js';
 import { formatDuration } from './audio-metadata.js';
 import { mountSignOut, requireLogin, translateError } from './auth.js';
 
@@ -28,21 +28,6 @@ const sessionSongs = { vocal: [], wishlist: [], original: [] };
 const player = document.querySelector('#hub-player');
 const playerLabel = document.querySelector('#hub-player-label');
 
-/** 파트별 악보 다운로드 목록. 곡 카드 안에서 TAB 버튼으로 펼칩니다. */
-function tabSheet(song) {
-  const groups = groupTabs(song.tab_paths || []);
-  if (!groups.length) {
-    return '<p class="tab-empty">등록된 악보가 없습니다. Admin에서 파트별 악보를 올려주세요.</p>';
-  }
-  return groups.map((group) => {
-    const links = group.items.map((item) => {
-      const name = tabFileName(song, item.path, item.index);
-      return `<a href="${downloadUrl(BUCKETS.tab, item.path, name)}" download="${esc(name)}" rel="noopener noreferrer">↓ ${group.short}${group.items.length > 1 ? ` ${item.index}` : ''}${item.ext ? ` · ${esc(item.ext.toUpperCase())}` : ''}</a>`;
-    }).join('');
-    return `<div class="tab-part"><b>${esc(group.label)}</b>${links}</div>`;
-  }).join('');
-}
-
 function songRows(songs, startIndex, emptyMessage) {
   return songs.map((song, i) => {
     const cover = publicUrl(BUCKETS.cover, song.cover_path);
@@ -52,9 +37,9 @@ function songRows(songs, startIndex, emptyMessage) {
     const play = song.audio_path
       ? `<button type="button" class="play-button" data-play="${song.id}" aria-label="${esc(song.title)} 재생">▶</button>`
       : '<span class="play-button play-button--empty" aria-hidden="true">—</span>';
-    // TAB 버튼은 재생 버튼 바로 아래에 세로로 붙습니다(.track-actions).
+    // TAB 버튼은 재생 버튼 바로 아래에 세로로 붙고, 누르면 미리보기 팝업이 열립니다.
     const tabButton = `<button type="button" class="tab-button${tabCount ? '' : ' tab-button--empty'}" data-tab="${song.id}"
-      aria-expanded="false" aria-controls="tab-sheet-${song.id}" aria-label="${esc(song.title)} 악보">TAB${tabCount ? `<i>${tabCount}</i>` : ''}</button>`;
+      aria-haspopup="dialog" aria-label="${esc(song.title)} 악보 미리보기">TAB${tabCount ? `<i>${tabCount}</i>` : ''}</button>`;
     return `<div class="setlist-row">
       <span class="track-index">${String(startIndex + i + 1).padStart(2, '0')}</span>
       ${cover ? `<img class="track-cover" src="${cover}" alt="" loading="lazy">` : ''}
@@ -62,7 +47,6 @@ function songRows(songs, startIndex, emptyMessage) {
         <div class="track-head"><b>${esc(song.title)}</b><div class="track-actions">${play}${tabButton}</div></div>
         <small>${esc(song.artist)}${song.album ? ` · ${esc(song.album)}` : ''}</small>
         <span class="track-meta">${esc(song.song_key || '—')} · ${formatDuration(song.duration)}${song.audio_size ? ` · ${formatBytes(song.audio_size)}` : ''}</span>
-        <div class="tab-sheet" id="tab-sheet-${song.id}" hidden>${tabSheet(song)}</div>
       </div>
     </div>`;
   }).join('') || `<p class="empty">${emptyMessage}</p>`;
@@ -116,14 +100,11 @@ document.querySelector('#setlist').addEventListener('click', async (event) => {
     return;
   }
 
-  // TAB — 파트별 악보 목록을 카드 안에서 펼치고 접습니다.
+  // TAB — 파트별 악보 미리보기 팝업을 엽니다.
   const tabButton = event.target.closest('[data-tab]');
   if (tabButton) {
-    const sheet = document.querySelector(`#tab-sheet-${CSS.escape(tabButton.dataset.tab)}`);
-    if (!sheet) return;
-    const open = sheet.hidden;
-    sheet.hidden = !open;
-    tabButton.setAttribute('aria-expanded', String(open));
+    const song = allSongs.find((item) => String(item.id) === tabButton.dataset.tab);
+    if (song) openTabViewer(song);
     return;
   }
 

@@ -9,6 +9,7 @@ import {
   publicUrl, removeFiles, saveJson, signedAudioUrl, updateSong, uploadFile,
 } from './db.js';
 import { TAB_INSTRUMENTS, groupTabs, tabFileName } from './tabs.js';
+import { openTabViewer } from './tab-viewer.js';
 import { extractAudioMetadata, formatDuration } from './audio-metadata.js';
 import { mountSignOut, requireLogin, translateError } from './auth.js';
 
@@ -103,8 +104,6 @@ songForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const submitButton = songForm.querySelector('button[type="submit"]');
   const audioFile = songForm.audio.files[0] || null;
-  const coverFile = songForm.cover.files[0] || null;
-  const tabFiles = Array.from(songForm.tabs.files || []);
   const uploaded = []; // 중간에 실패하면 되돌리기 위한 기록
 
   submitButton.disabled = true;
@@ -131,21 +130,6 @@ songForm.addEventListener('submit', async (event) => {
       record.audio_size = audioFile.size;
       record.audio_type = audioFile.type || null;
       record.duration = metadata?.duration || null;
-    }
-
-    if (coverFile) {
-      showProgress(`커버 업로드 — ${coverFile.name}`, 0);
-      record.cover_path = await uploadFile(BUCKETS.cover, coverFile, (r) => showProgress(`커버 업로드 — ${coverFile.name}`, r));
-      uploaded.push([BUCKETS.cover, record.cover_path]);
-    }
-
-    const newTabInstrument = songForm.tabInstrument?.value || 'etc';
-    for (const [index, file] of tabFiles.entries()) {
-      showProgress(`악보 업로드 ${index + 1}/${tabFiles.length} — ${file.name}`, 0);
-      // eslint-disable-next-line no-await-in-loop
-      const path = await uploadFile(BUCKETS.tab, file, (r) => showProgress(`악보 업로드 ${index + 1}/${tabFiles.length} — ${file.name}`, r), { prefix: newTabInstrument });
-      uploaded.push([BUCKETS.tab, path]);
-      record.tab_paths.push(path);
     }
 
     await createSong(record);
@@ -208,14 +192,18 @@ function tabManagerHtml(song) {
   }).join('') || '<p class="tab-feedback">아직 등록된 악보가 없습니다.</p>';
 
   const options = TAB_INSTRUMENTS.map((item) => `<option value="${item.id}">${escapeHtml(item.label)}</option>`).join('');
+  const count = (song.tab_paths || []).length;
   return `<div class="tab-manager">
-    <h4>TAB 악보 — ${escapeHtml(song.artist)} · ${escapeHtml(song.title)}</h4>
+    <div class="tab-manager-head">
+      <h4>TAB 악보 — ${escapeHtml(song.artist)} · ${escapeHtml(song.title)}</h4>
+      <button type="button" class="tab-button" data-tab-preview="${song.id}" aria-haspopup="dialog" ${count ? '' : 'disabled'}>미리보기 팝업${count ? `<i>${count}</i>` : ''}</button>
+    </div>
     ${parts}
     <div class="tab-upload">
       <label class="visually-hidden" for="tab-instrument-${song.id}">파트</label>
       <select id="tab-instrument-${song.id}" data-tab-instrument="${song.id}">${options}</select>
       <input type="file" data-tab-file="${song.id}" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf" multiple>
-      <button type="button" class="metal-button" data-tab-upload="${song.id}">악보 생성 · 업로드</button>
+      <button type="button" class="metal-button" data-tab-upload="${song.id}">악보 등록 · 업로드</button>
     </div>
     <p class="tab-feedback" data-tab-feedback="${song.id}" role="status">기타 · 드럼 · 키보드 등 파트를 고르고 PDF 또는 이미지 악보를 올리면, Member Hub의 TAB 버튼에서 파트별로 내려받습니다.</p>
   </div>`;
@@ -307,6 +295,14 @@ document.querySelector('#song-table').addEventListener('click', async (event) =>
     row.hidden = !open;
     tabToggle.setAttribute('aria-expanded', String(open));
     openTabSongId = open ? id : null;
+    return;
+  }
+
+  // ---- 악보 미리보기 팝업 ----
+  const previewButton = event.target.closest('[data-tab-preview]');
+  if (previewButton) {
+    const song = currentRows.find((item) => String(item.id) === previewButton.dataset.tabPreview);
+    if (song) openTabViewer(song);
     return;
   }
 

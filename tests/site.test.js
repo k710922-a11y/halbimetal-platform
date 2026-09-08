@@ -87,29 +87,36 @@ test('admin can assign songs to the arrangement/original session', () => {
   assert.match(adminJs, /\['original', '편곡\/자작곡'\]/);
 });
 
-test('tab sheets are filed per instrument and offered as downloads', async () => {
+test('tab sheets are filed per instrument and opened in a preview popup', async () => {
   const tabsJs = await readFile(new URL('../src/tabs.js', import.meta.url), 'utf8');
+  const viewerJs = await readFile(new URL('../src/tab-viewer.js', import.meta.url), 'utf8');
   for (const id of ['guitar', 'bass', 'drum', 'keyboard', 'vocal', 'band']) {
     assert.match(tabsJs, new RegExp(`id: '${id}'`));
   }
   // 파트는 저장소 경로의 첫 칸으로 구분하므로 서버 DB 스키마 변경이 필요 없습니다.
   assert.match(dbJs, /export function storageKey\(file, prefix = ''\)/);
   assert.match(dbJs, /export function downloadUrl\(/);
-  // Hub 는 재생 버튼 아래에 TAB 버튼을 세로로 붙입니다.
+  // 팝업은 파트 카테고리 + 미리보기 + 내려받기를 함께 제공합니다.
+  assert.match(viewerJs, /role="tablist"/);
+  assert.match(viewerJs, /<iframe src="\$\{url\}#view=FitH"/);
+  assert.match(viewerJs, /내려받기/);
+  // Hub 와 Admin 모두 같은 팝업을 씁니다.
   assert.match(hubJs, /class="track-actions"/);
-  assert.match(hubJs, /data-tab="\$\{song\.id\}"/);
+  assert.match(hubJs, /openTabViewer\(song\)/);
+  assert.match(adminJs, /openTabViewer\(song\)/);
   // Admin 은 곡마다 파트별 악보를 등록·삭제할 수 있어야 합니다.
   assert.match(adminJs, /data-tab-upload="\$\{song\.id\}"/);
   assert.match(adminJs, /data-tab-delete=/);
-  assert.match(adminHtml, /name="tabInstrument"/);
+  assert.match(adminJs, /data-tab-instrument="\$\{song\.id\}"/);
 });
 
-test('song form uploads audio, cover art and tab sheets', () => {
+test('song form uploads audio only — covers and tab files are not registered here', () => {
   assert.doesNotMatch(adminHtml, /name="bpm"/);
   assert.match(adminHtml, /id="audio-metadata-feedback"/);
   assert.match(adminHtml, /name="audio" type="file"/);
-  assert.match(adminHtml, /name="cover" type="file"/);
-  assert.match(adminHtml, /name="tabs" type="file"[^>]*multiple/);
+  assert.doesNotMatch(adminHtml, /name="cover" type="file"/);
+  assert.doesNotMatch(adminHtml, /name="tabs" type="file"/);
+  assert.match(adminHtml, /TAB 관리/);
   assert.match(adminHtml, /id="upload-progress"/);
 });
 

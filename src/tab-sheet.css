@@ -57,57 +57,20 @@
   border-color: #262626;
 }
 
-.tab-sheet {
-  margin-top: 0.6rem;
-  border-top: 1px dashed #333;
-  padding-top: 0.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.tab-sheet[hidden] {
-  display: none;
-}
-
-.tab-sheet .tab-part {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4rem;
-}
-
-.tab-sheet .tab-part > b {
-  min-width: 84px;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  color: #9a9a9a;
-}
-
-.tab-sheet a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.22rem 0.5rem;
-  border: 1px solid rgba(143, 178, 0, 0.45);
-  color: #d4ff00;
-  font-size: 0.68rem;
-  text-decoration: none;
-}
-
-.tab-sheet a:hover,
-.tab-sheet a:focus-visible {
-  background: rgba(212, 255, 0, 0.1);
-  border-color: #d4ff00;
-}
-
-.tab-sheet .tab-empty {
-  color: #777;
-  font-size: 0.72rem;
-  margin: 0;
+.tab-button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* ---- Admin: 곡 행 아래로 펼쳐지는 악보 관리 패널 ---- */
+.tab-manager-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
 .tab-manager {
   display: flex;
   flex-direction: column;
