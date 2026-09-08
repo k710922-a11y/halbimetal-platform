@@ -69,16 +69,39 @@ test('admin schedule form includes visible save feedback', () => {
   assert.match(adminHtml, /id="schedule-feedback"/);
 });
 
-test('rehearsal songs use the requested cover sessions and TBD originals', () => {
+test('rehearsal songs cover the vocal set, wish list and originals', () => {
   assert.match(hubHtml, /보컬\(joshthejaws\)가 연습\/공연곡/);
   assert.match(hubHtml, /Wish List/);
   assert.match(hubHtml, /편곡\/자작곡/);
-  assert.match(hubHtml, /TBD/);
+  assert.match(hubHtml, /id="original-list"/);
+  assert.doesNotMatch(hubHtml, /tbd-card/);
 });
 
 test('each rehearsal list has ten-item pagination controls', () => {
   assert.match(hubHtml, /id="vocal-pagination"/);
   assert.match(hubHtml, /id="wishlist-pagination"/);
+  assert.match(hubHtml, /id="original-pagination"/);
+});
+
+test('admin can assign songs to the arrangement/original session', () => {
+  assert.match(adminJs, /\['original', '편곡\/자작곡'\]/);
+});
+
+test('tab sheets are filed per instrument and offered as downloads', async () => {
+  const tabsJs = await readFile(new URL('../src/tabs.js', import.meta.url), 'utf8');
+  for (const id of ['guitar', 'bass', 'drum', 'keyboard', 'vocal', 'band']) {
+    assert.match(tabsJs, new RegExp(`id: '${id}'`));
+  }
+  // 파트는 저장소 경로의 첫 칸으로 구분하므로 서버 DB 스키마 변경이 필요 없습니다.
+  assert.match(dbJs, /export function storageKey\(file, prefix = ''\)/);
+  assert.match(dbJs, /export function downloadUrl\(/);
+  // Hub 는 재생 버튼 아래에 TAB 버튼을 세로로 붙입니다.
+  assert.match(hubJs, /class="track-actions"/);
+  assert.match(hubJs, /data-tab="\$\{song\.id\}"/);
+  // Admin 은 곡마다 파트별 악보를 등록·삭제할 수 있어야 합니다.
+  assert.match(adminJs, /data-tab-upload="\$\{song\.id\}"/);
+  assert.match(adminJs, /data-tab-delete=/);
+  assert.match(adminHtml, /name="tabInstrument"/);
 });
 
 test('song form uploads audio, cover art and tab sheets', () => {

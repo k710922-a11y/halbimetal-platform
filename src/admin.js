@@ -3,10 +3,12 @@ import './rehearsal.css';
 import './setlist-pagination.css';
 import './schedule-feedback.css';
 import './song-library.css';
+import './tab-sheet.css';
 import {
-  BUCKETS, createSong, deleteSong, formatBytes, listSongs, loadJson,
+  BUCKETS, createSong, deleteSong, downloadUrl, formatBytes, listSongs, loadJson,
   publicUrl, removeFiles, saveJson, signedAudioUrl, updateSong, uploadFile,
 } from './db.js';
+import { TAB_INSTRUMENTS, groupTabs, tabFileName } from './tabs.js';
 import { extractAudioMetadata, formatDuration } from './audio-metadata.js';
 import { mountSignOut, requireLogin, translateError } from './auth.js';
 
@@ -137,10 +139,11 @@ songForm.addEventListener('submit', async (event) => {
       uploaded.push([BUCKETS.cover, record.cover_path]);
     }
 
+    const newTabInstrument = songForm.tabInstrument?.value || 'etc';
     for (const [index, file] of tabFiles.entries()) {
       showProgress(`악보 업로드 ${index + 1}/${tabFiles.length} — ${file.name}`, 0);
       // eslint-disable-next-line no-await-in-loop
-      const path = await uploadFile(BUCKETS.tab, file, (r) => showProgress(`악보 업로드 ${index + 1}/${tabFiles.length} — ${file.name}`, r));
+      const path = await uploadFile(BUCKETS.tab, file, (r) => showProgress(`악보 업로드 ${index + 1}/${tabFiles.length} — ${file.name}`, r), { prefix: newTabInstrument });
       uploaded.push([BUCKETS.tab, path]);
       record.tab_paths.push(path);
     }
@@ -167,27 +170,89 @@ songForm.addEventListener('submit', async (event) => {
   }
 });
 
+// =============================================================================
+// TAB 악보 — 파트별 등록 · 다운로드 · 삭제
+//
+// 파트는 저장소 경로의 첫 칸(guitar/… drum/…)으로 구분합니다(src/tabs.js 참고).
+// 서버 DB 스키마를 바꾸지 않아도 되고, 예전에 올린 악보도 '기타 자료'로 남습니다.
+// =============================================================================
+const SESSION_OPTIONS = [
+  ['unassigned', '미분류'],
+  ['vocal', '보컬 연습/공연곡'],
+  ['wishlist', 'Wish List'],
+  ['original', '편곡/자작곡'],
+];
+let openTabSongId = null;
+
 function fileCell(song) {
-  const tabs = song.tab_paths || [];
-  const tabLinks = tabs.map((path, index) => `<a href="${publicUrl(BUCKETS.tab, path)}" target="_blank" rel="noopener noreferrer">악보${index + 1}</a>`).join(' ');
+  const tabCount = (song.tab_paths || []).length;
+  const tabButton = `<button type="button" class="tab-button${tabCount ? '' : ' tab-button--empty'}" data-tabs="${song.id}"
+    aria-expanded="${String(String(song.id) === String(openTabSongId))}" aria-controls="tab-row-${song.id}">TAB 관리${tabCount ? `<i>${tabCount}</i>` : ''}</button>`;
   if (!song.audio_path) {
-    return `<small>음원 없음</small>${tabs.length ? `<div class="tab-links">${tabLinks}</div>` : ''}`;
+    return `<small>음원 없음</small><div class="track-actions">${tabButton}</div>`;
   }
-  return `<button type="button" class="play-button" data-play="${song.id}">▶ 재생</button>
-    <small>${escapeHtml(song.audio_name || '음원')}<br>${formatDuration(song.duration)} · ${formatBytes(song.audio_size)}</small>
-    ${tabs.length ? `<div class="tab-links">${tabLinks}</div>` : ''}`;
+  return `<div class="track-actions"><button type="button" class="play-button" data-play="${song.id}">▶ 재생</button>${tabButton}</div>
+    <small>${escapeHtml(song.audio_name || '음원')}<br>${formatDuration(song.duration)} · ${formatBytes(song.audio_size)}</small>`;
+}
+
+/** 곡 행 아래로 펼쳐지는 악보 관리 패널. */
+function tabManagerHtml(song) {
+  const groups = groupTabs(song.tab_paths || []);
+  const parts = groups.map((group) => {
+    const files = group.items.map((item) => {
+      const name = tabFileName(song, item.path, item.index);
+      return `<span class="tab-file"><a href="${downloadUrl(BUCKETS.tab, item.path, name)}" download="${escapeHtml(name)}" rel="noopener noreferrer">↓ ${escapeHtml(name)}</a>
+        <button type="button" data-tab-delete="${escapeHtml(item.path)}" data-song="${song.id}" aria-label="${escapeHtml(name)} 삭제">✕</button></span>`;
+    }).join('');
+    return `<div class="tab-part"><b>${escapeHtml(group.label)}</b>${files}</div>`;
+  }).join('') || '<p class="tab-feedback">아직 등록된 악보가 없습니다.</p>';
+
+  const options = TAB_INSTRUMENTS.map((item) => `<option value="${item.id}">${escapeHtml(item.label)}</option>`).join('');
+  return `<div class="tab-manager">
+    <h4>TAB 악보 — ${escapeHtml(song.artist)} · ${escapeHtml(song.title)}</h4>
+    ${parts}
+    <div class="tab-upload">
+      <label class="visually-hidden" for="tab-instrument-${song.id}">파트</label>
+      <select id="tab-instrument-${song.id}" data-tab-instrument="${song.id}">${options}</select>
+      <input type="file" data-tab-file="${song.id}" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf" multiple>
+      <button type="button" class="metal-button" data-tab-upload="${song.id}">악보 생성 · 업로드</button>
+    </div>
+    <p class="tab-feedback" data-tab-feedback="${song.id}" role="status">기타 · 드럼 · 키보드 등 파트를 고르고 PDF 또는 이미지 악보를 올리면, Member Hub의 TAB 버튼에서 파트별로 내려받습니다.</p>
+  </div>`;
 }
 
 function rowHtml(song) {
   const cover = publicUrl(BUCKETS.cover, song.cover_path);
+  const options = SESSION_OPTIONS
+    .map(([value, label]) => `<option value="${value}" ${(song.session || 'unassigned') === value ? 'selected' : ''}>${label}</option>`)
+    .join('');
+  const open = String(song.id) === String(openTabSongId);
   return `<tr>
     <td><div class="song-cell">${cover ? `<img class="song-cover" src="${cover}" alt="" loading="lazy">` : '<span class="song-cover song-cover--empty">♪</span>'}<div><b>${escapeHtml(song.artist)} — ${escapeHtml(song.title)}</b><small>${escapeHtml(song.album || '앨범 정보 없음')}</small></div></div></td>
-    <td><select class="session-select" data-assign="${song.id}" aria-label="${escapeHtml(song.title)} 연습곡 세션"><option value="unassigned" ${!song.session || song.session === 'unassigned' ? 'selected' : ''}>미분류</option><option value="vocal" ${song.session === 'vocal' ? 'selected' : ''}>보컬 연습/공연곡</option><option value="wishlist" ${song.session === 'wishlist' ? 'selected' : ''}>Wish List</option></select></td>
+    <td><select class="session-select" data-assign="${song.id}" aria-label="${escapeHtml(song.title)} 연습곡 세션">${options}</select></td>
     <td>${escapeHtml(song.song_key || '—')}</td>
     <td>${fileCell(song)}</td>
     <td><div class="progress"><i style="width:${song.progress}%"></i></div><small>${song.progress}%</small></td>
     <td><button type="button" class="delete-button" data-delete="${song.id}">삭제</button></td>
-  </tr>`;
+  </tr>
+  <tr class="tab-row" id="tab-row-${song.id}" ${open ? '' : 'hidden'}><td colspan="6">${tabManagerHtml(song)}</td></tr>`;
+}
+
+/** 업로드·삭제 후 표 전체를 다시 그리지 않고 해당 패널만 갱신합니다. */
+function refreshTabPanel(song) {
+  const cell = document.querySelector(`#tab-row-${CSS.escape(String(song.id))} td`);
+  if (cell) cell.innerHTML = tabManagerHtml(song);
+  const button = document.querySelector(`[data-tabs="${CSS.escape(String(song.id))}"]`);
+  if (button) {
+    const count = (song.tab_paths || []).length;
+    button.innerHTML = `TAB 관리${count ? `<i>${count}</i>` : ''}`;
+    button.classList.toggle('tab-button--empty', count === 0);
+  }
+}
+
+function tabFeedback(songId, message) {
+  const line = document.querySelector(`[data-tab-feedback="${CSS.escape(String(songId))}"]`);
+  if (line) line.textContent = message;
 }
 
 async function renderSongs() {
@@ -230,6 +295,91 @@ document.querySelector('#song-table').addEventListener('click', async (event) =>
     return;
   }
 
+  // ---- TAB 악보 패널 열고 닫기 ----
+  const tabToggle = event.target.closest('[data-tabs]');
+  if (tabToggle) {
+    const id = tabToggle.dataset.tabs;
+    const row = document.querySelector(`#tab-row-${CSS.escape(id)}`);
+    if (!row) return;
+    const open = row.hidden;
+    document.querySelectorAll('.tab-row').forEach((item) => { item.hidden = true; });
+    document.querySelectorAll('[data-tabs]').forEach((item) => item.setAttribute('aria-expanded', 'false'));
+    row.hidden = !open;
+    tabToggle.setAttribute('aria-expanded', String(open));
+    openTabSongId = open ? id : null;
+    return;
+  }
+
+  // ---- 파트별 악보 업로드 ----
+  const uploadButton = event.target.closest('[data-tab-upload]');
+  if (uploadButton) {
+    const id = uploadButton.dataset.tabUpload;
+    const song = currentRows.find((item) => String(item.id) === id);
+    if (!song) return;
+    const instrument = document.querySelector(`[data-tab-instrument="${CSS.escape(id)}"]`)?.value || 'etc';
+    const input = document.querySelector(`[data-tab-file="${CSS.escape(id)}"]`);
+    const files = Array.from(input?.files || []);
+    if (!files.length) { tabFeedback(id, '올릴 악보 파일을 먼저 선택해주세요.'); return; }
+
+    uploadButton.disabled = true;
+    const added = [];
+    try {
+      for (const [index, file] of files.entries()) {
+        tabFeedback(id, `업로드 중 ${index + 1}/${files.length} — ${file.name}`);
+        // eslint-disable-next-line no-await-in-loop
+        const path = await uploadFile(BUCKETS.tab, file, undefined, { prefix: instrument });
+        added.push(path);
+      }
+      const tabPaths = [...(song.tab_paths || []), ...added];
+      await updateSong(song.id, { tab_paths: tabPaths });
+      song.tab_paths = tabPaths;
+      refreshTabPanel(song);
+      tabFeedback(id, `${files.length}개 악보를 등록했습니다. Member Hub의 TAB 버튼에서 확인할 수 있습니다.`);
+    } catch (error) {
+      // 행에 반영하지 못했으면 방금 올린 파일을 지웁니다 — 안 지우면 고아 파일이 남습니다.
+      for (const path of added) {
+        try { await removeFiles(BUCKETS.tab, [path]); } catch { /* 정리 실패는 무시 */ }
+      }
+      tabFeedback(id, `업로드 실패 — ${translateError(error)}`);
+    } finally {
+      uploadButton.disabled = false;
+    }
+    return;
+  }
+
+  // ---- 악보 한 장 삭제 ----
+  const tabDelete = event.target.closest('[data-tab-delete]');
+  if (tabDelete) {
+    const id = tabDelete.dataset.song;
+    const song = currentRows.find((item) => String(item.id) === id);
+    if (!song) return;
+    // 곡 삭제와 같은 방식으로 두 번 눌러야 지워집니다.
+    if (tabDelete.dataset.armed !== 'yes') {
+      tabDelete.dataset.armed = 'yes';
+      tabDelete.textContent = '삭제?';
+      setTimeout(() => {
+        if (!tabDelete.isConnected) return;
+        tabDelete.dataset.armed = '';
+        tabDelete.textContent = '✕';
+      }, 4000);
+      return;
+    }
+    tabDelete.disabled = true;
+    const path = tabDelete.dataset.tabDelete;
+    try {
+      const remaining = (song.tab_paths || []).filter((item) => item !== path);
+      await updateSong(song.id, { tab_paths: remaining });
+      song.tab_paths = remaining;
+      await removeFiles(BUCKETS.tab, [path]);
+      refreshTabPanel(song);
+      tabFeedback(id, '악보를 삭제했습니다.');
+    } catch (error) {
+      tabDelete.disabled = false;
+      tabFeedback(id, `삭제 실패 — ${translateError(error)}`);
+    }
+    return;
+  }
+
   const deleteButton = event.target.closest('[data-delete]');
   if (!deleteButton) return;
   // 확인 대화상자 대신 두 번 누르게 합니다 — 실수로 지우는 사고를 막습니다.
@@ -262,14 +412,19 @@ document.querySelector('#song-table').addEventListener('change', async (event) =
   const song = currentRows.find((item) => String(item.id) === select.dataset.assign);
   if (!song) return;
   const previous = song.session;
+  const next = select.value;
   select.disabled = true;
   try {
-    await updateSong(song.id, { session: select.value });
-    song.session = select.value;
+    await updateSong(song.id, { session: next });
+    song.session = next;
     songFeedback.textContent = `${song.title}의 연습곡 세션이 변경되었습니다.`;
   } catch (error) {
     select.value = previous;
-    songFeedback.textContent = `변경 실패 — ${translateError(error)}`;
+    // songs.session 에 CHECK 제약이 걸려 있으면 '편곡/자작곡'(original) 이 거부됩니다.
+    const constraint = /check constraint|violates|22P02|23514/i.test(error?.message || '') || error?.code === '23514';
+    songFeedback.textContent = constraint && next === 'original'
+      ? '변경 실패 — 서버 DB의 songs.session 제약에 original 값이 없습니다. docs/TAB-SHEETS.md 의 SQL 을 한 번 실행해주세요.'
+      : `변경 실패 — ${translateError(error)}`;
   } finally {
     select.disabled = false;
   }

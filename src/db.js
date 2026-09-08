@@ -94,11 +94,13 @@ function extensionOf(name = '') {
  * 한글 파일명을 그대로 키로 쓰면 인코딩 문제가 생기기 쉬우므로,
  * 키는 UUID 로 두고 원래 파일명은 DB 컬럼(audio_name)에 남깁니다.
  */
-export function storageKey(file) {
+export function storageKey(file, prefix = '') {
   const year = new Date().getFullYear();
   const id = globalThis.crypto?.randomUUID?.()
     ?? `${Date.now().toString(36)}-${Math.random().toString(16).slice(2, 10)}`;
-  return `${year}/${id}.${extensionOf(file.name)}`;
+  // 악보는 파트(guitar·drum…)를 경로 맨 앞에 붙입니다 — tabs.js 의 설명 참고.
+  const folder = prefix ? `${String(prefix).replace(/^\/+|\/+$/g, '')}/` : '';
+  return `${folder}${year}/${id}.${extensionOf(file.name)}`;
 }
 
 function xhrErrorMessage(xhr) {
@@ -117,13 +119,13 @@ function xhrErrorMessage(xhr) {
  * 진행률이 필요해서 SDK 대신 XHR 로 직접 올립니다.
  * (supabase-js 의 upload 는 진행률 콜백을 주지 않습니다)
  */
-export async function uploadFile(bucket, file, onProgress) {
+export async function uploadFile(bucket, file, onProgress, { prefix = '' } = {}) {
   const client = requireClient();
   const { data } = await client.auth.getSession();
   const token = data?.session?.access_token;
   if (!token) throw new Error('로그인이 만료되었습니다. 새로고침 후 다시 로그인해주세요.');
 
-  const path = storageKey(file);
+  const path = storageKey(file, prefix);
 
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -157,6 +159,17 @@ export async function removeFiles(bucket, paths) {
 /** 공개 버킷(커버·악보) 전용. 경로가 없으면 빈 문자열. */
 export function publicUrl(bucket, path) {
   return path ? `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}` : '';
+}
+
+/**
+ * 공개 버킷 파일을 '보기'가 아니라 '내려받기'로 여는 주소.
+ * Supabase Storage 는 `?download=이름` 을 붙이면 첨부파일 헤더를 붙여줍니다.
+ * (다른 도메인이라 <a download> 속성은 무시되므로 이 방법을 씁니다.)
+ */
+export function downloadUrl(bucket, path, filename = '') {
+  const base = publicUrl(bucket, path);
+  if (!base) return '';
+  return filename ? `${base}?download=${encodeURIComponent(filename)}` : `${base}?download`;
 }
 
 /** 비공개 버킷(음원) 전용. 기본 1시간짜리 임시 주소를 발급합니다. */

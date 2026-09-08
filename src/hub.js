@@ -4,7 +4,9 @@ import './setlist-pagination.css';
 import './news-board.css';
 import './schedule-feedback.css';
 import './song-library.css';
-import { BUCKETS, fetchAllSongs, formatBytes, loadJson, publicUrl, saveJson, signedAudioUrl } from './db.js';
+import './tab-sheet.css';
+import { BUCKETS, downloadUrl, fetchAllSongs, formatBytes, loadJson, publicUrl, saveJson, signedAudioUrl } from './db.js';
+import { groupTabs, tabFileName } from './tabs.js';
 import { formatDuration } from './audio-metadata.js';
 import { mountSignOut, requireLogin, translateError } from './auth.js';
 
@@ -16,34 +18,58 @@ const schedule = loadJson(SCHEDULE_KEY, {}); if (schedule.date) { document.query
 
 // 카드가 한 줄에 3개 → 3줄이면 9곡. 그 이상이면 페이징이 나옵니다.
 const PAGE_SIZE = 9;
-const sessionPages = { vocal: 1, wishlist: 1 };
-const sessionSongs = { vocal: [], wishlist: [] };
+const SESSION_VIEWS = {
+  vocal: { list: '#cover-vocal-list', pager: '#vocal-pagination', empty: 'Admin에서 보컬 연습/공연곡을 선택해주세요.' },
+  wishlist: { list: '#wishlist-list', pager: '#wishlist-pagination', empty: 'Admin에서 Wish List 곡을 선택해주세요.' },
+  original: { list: '#original-list', pager: '#original-pagination', empty: 'Admin에서 편곡/자작곡을 선택해주세요.' },
+};
+const sessionPages = { vocal: 1, wishlist: 1, original: 1 };
+const sessionSongs = { vocal: [], wishlist: [], original: [] };
 const player = document.querySelector('#hub-player');
 const playerLabel = document.querySelector('#hub-player-label');
+
+/** 파트별 악보 다운로드 목록. 곡 카드 안에서 TAB 버튼으로 펼칩니다. */
+function tabSheet(song) {
+  const groups = groupTabs(song.tab_paths || []);
+  if (!groups.length) {
+    return '<p class="tab-empty">등록된 악보가 없습니다. Admin에서 파트별 악보를 올려주세요.</p>';
+  }
+  return groups.map((group) => {
+    const links = group.items.map((item) => {
+      const name = tabFileName(song, item.path, item.index);
+      return `<a href="${downloadUrl(BUCKETS.tab, item.path, name)}" download="${esc(name)}" rel="noopener noreferrer">↓ ${group.short}${group.items.length > 1 ? ` ${item.index}` : ''}${item.ext ? ` · ${esc(item.ext.toUpperCase())}` : ''}</a>`;
+    }).join('');
+    return `<div class="tab-part"><b>${esc(group.label)}</b>${links}</div>`;
+  }).join('');
+}
 
 function songRows(songs, startIndex, emptyMessage) {
   return songs.map((song, i) => {
     const cover = publicUrl(BUCKETS.cover, song.cover_path);
-    const tabs = (song.tab_paths || []).map((path, index) => `<a href="${publicUrl(BUCKETS.tab, path)}" target="_blank" rel="noopener noreferrer">악보${index + 1}</a>`).join(' ');
+    const tabCount = (song.tab_paths || []).length;
     // 재생 버튼은 제목과 같은 줄(.track-head)에 둡니다.
     // 예전처럼 행의 마지막 자식으로 두면 그리드가 다음 줄로 밀어내서 제목 '아래'에 붙습니다.
     const play = song.audio_path
       ? `<button type="button" class="play-button" data-play="${song.id}" aria-label="${esc(song.title)} 재생">▶</button>`
       : '<span class="play-button play-button--empty" aria-hidden="true">—</span>';
+    // TAB 버튼은 재생 버튼 바로 아래에 세로로 붙습니다(.track-actions).
+    const tabButton = `<button type="button" class="tab-button${tabCount ? '' : ' tab-button--empty'}" data-tab="${song.id}"
+      aria-expanded="false" aria-controls="tab-sheet-${song.id}" aria-label="${esc(song.title)} 악보">TAB${tabCount ? `<i>${tabCount}</i>` : ''}</button>`;
     return `<div class="setlist-row">
       <span class="track-index">${String(startIndex + i + 1).padStart(2, '0')}</span>
       ${cover ? `<img class="track-cover" src="${cover}" alt="" loading="lazy">` : ''}
       <div class="track-main">
-        <div class="track-head"><b>${esc(song.title)}</b>${play}</div>
+        <div class="track-head"><b>${esc(song.title)}</b><div class="track-actions">${play}${tabButton}</div></div>
         <small>${esc(song.artist)}${song.album ? ` · ${esc(song.album)}` : ''}</small>
         <span class="track-meta">${esc(song.song_key || '—')} · ${formatDuration(song.duration)}${song.audio_size ? ` · ${formatBytes(song.audio_size)}` : ''}</span>
-        ${tabs ? `<span class="tab-links">${tabs}</span>` : ''}
+        <div class="tab-sheet" id="tab-sheet-${song.id}" hidden>${tabSheet(song)}</div>
       </div>
     </div>`;
   }).join('') || `<p class="empty">${emptyMessage}</p>`;
 }
 
-function renderSession(name, listId, pagerId, emptyMessage) {
+function renderSession(name) {
+  const { list: listId, pager: pagerId, empty: emptyMessage } = SESSION_VIEWS[name];
   const songs = sessionSongs[name];
   const totalPages = Math.max(1, Math.ceil(songs.length / PAGE_SIZE));
   sessionPages[name] = Math.min(sessionPages[name], totalPages);
@@ -64,9 +90,10 @@ async function renderSetlist() {
   }
   sessionSongs.vocal = allSongs.filter((song) => song.session === 'vocal');
   sessionSongs.wishlist = allSongs.filter((song) => song.session === 'wishlist');
-  document.querySelector('#hub-song-count').textContent = `${sessionSongs.vocal.length + sessionSongs.wishlist.length} TRACKS`;
-  renderSession('vocal', '#cover-vocal-list', '#vocal-pagination', 'Admin에서 보컬 연습/공연곡을 선택해주세요.');
-  renderSession('wishlist', '#wishlist-list', '#wishlist-pagination', 'Admin에서 Wish List 곡을 선택해주세요.');
+  sessionSongs.original = allSongs.filter((song) => song.session === 'original');
+  const total = sessionSongs.vocal.length + sessionSongs.wishlist.length + sessionSongs.original.length;
+  document.querySelector('#hub-song-count').textContent = `${total} TRACKS`;
+  Object.keys(SESSION_VIEWS).forEach(renderSession);
 }
 
 document.querySelector('#setlist').addEventListener('click', async (event) => {
@@ -88,15 +115,22 @@ document.querySelector('#setlist').addEventListener('click', async (event) => {
     }
     return;
   }
+
+  // TAB — 파트별 악보 목록을 카드 안에서 펼치고 접습니다.
+  const tabButton = event.target.closest('[data-tab]');
+  if (tabButton) {
+    const sheet = document.querySelector(`#tab-sheet-${CSS.escape(tabButton.dataset.tab)}`);
+    if (!sheet) return;
+    const open = sheet.hidden;
+    sheet.hidden = !open;
+    tabButton.setAttribute('aria-expanded', String(open));
+    return;
+  }
+
   const button = event.target.closest('[data-page]');
   if (!button) return;
   sessionPages[button.dataset.session] += button.dataset.page === 'next' ? 1 : -1;
-  renderSession(
-    button.dataset.session,
-    button.dataset.session === 'vocal' ? '#cover-vocal-list' : '#wishlist-list',
-    button.dataset.session === 'vocal' ? '#vocal-pagination' : '#wishlist-pagination',
-    button.dataset.session === 'vocal' ? 'Admin에서 보컬 연습/공연곡을 선택해주세요.' : 'Admin에서 Wish List 곡을 선택해주세요.',
-  );
+  renderSession(button.dataset.session);
 });
 
 function renderNotices() { const notices = loadJson(NOTICE_KEY, []); document.querySelector('#notice-list').innerHTML = notices.map((n) => `<article class="notice"><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p><time>${new Date(n.createdAt).toLocaleString('ko-KR')}</time></article>`).join('') || '<p class="empty">등록된 공지가 없습니다.</p>'; }
