@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T21:26:42.265Z",
+  "generatedAt": "2026-09-16T04:55:39.609Z",
   "items": [
     {
       "id": "QmxhYmJlcm1vdXRoOkJSSUFO",
@@ -8,6 +8,14 @@
       "source": "Blabbermouth",
       "category": "metal",
       "publishedAt": "2026-09-15T21:16:54.000Z"
+    },
+    {
+      "id": "TWV0YWwgSW5qZWN0aW9uOkxJ",
+      "title": "LISTEN: EMPTY SHELL CASING Show Why They&#039;re the Most Exciting Band In Nu-Metal on &#034;No Reason&#034;",
+      "url": "https://metalinjection.net/new-music/listen-empty-shell-casing-show-why-theyre-the-most-exciting-band-in-nu-metal-on-no-reason",
+      "source": "Metal Injection",
+      "category": "metal",
+      "publishedAt": "2026-09-15T20:01:31.000Z"
     },
     {
       "id": "TWV0YWwgSW5qZWN0aW9uOkRJ",
@@ -154,14 +162,6 @@
       "publishedAt": "2026-09-15T13:53:30.000Z"
     },
     {
-      "id": "QmxhYmJlcm1vdXRoOllOR1dJ",
-      "title": "YNGWIE J. MALMSTEEN Is Happy, Healthy And More Committed Than Ever To Doing It His Way",
-      "url": "https://blabbermouth.net/features/yngwie-j-malmsteen-is-happy-healthy-and-more-committed-than-ever-to-doing-it-his-way",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-09-15T13:11:35.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "`김광석 나의 노래 다시 부르기 대회` 참가자 모집 - 대구광역일보",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5jVWtOZ3ZORDFXTEs4S0RGRFFfek5pQWRxZVVCdm1FOG56OHlGdktZb2xpYUZ0Ti0zb2huT3dJU2dVZDJqcHpMUk1hT3llWW11aDNkbkVXcTY?oc=5",
@@ -187,7 +187,15 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "전남광주 곳곳 문화예술 무대 풍성…가을 축제·공연 잇따라 - 쿠키뉴스",
+      "title": "'GXG 2026' 자원봉사자 모집... 9월 4일 마감 - 인벤",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBtME1CLV8wTVpxVTN3LVNhaUpXSmEwZ1M0TU14NkJjazdscDFXbFNXWURlaC11cF9YSDVabGw1Slh0RWdza1RPblY4T3BJZmRkaUt3QXdzeU5IdHRReEE?oc=5",
+      "source": "Google News · 공연 모집",
+      "category": "opportunity",
+      "publishedAt": "2026-08-26T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
+      "title": "전남광주 곳곳 문화예술 무대 풍성…가을 축제·공연 잇따라 - kukinews.com",
       "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB4YnhrWVZJakhBZE9zSkxTOC0tNktUVVhfN0xqUkQxaTNlQ1dpY09PUm5UbXFtaU00WE1fSHlqSGgtNExNRG5SSTlpMjFnMFhwT2pENTcwTUhscWRNMkpIMDk1QQ?oc=5",
       "source": "Google News · 공연 모집",
       "category": "opportunity",
@@ -267,7 +275,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "[문화] 평택시 \"제16회 평택전국밴드경연대회 & 뮤직페스티벌 8월 1일 개최\" - mp-news.com",
+      "title": "[문화] 평택시 \"제16회 평택전국밴드경연대회 & 뮤직페스티벌 8월 1일 개최\" - 수도권지역뉴스",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0tUm9BUTRjbDBacjZ0czRVcnZpUUlqZGdZZmw0VFBoMFZDcHo4Rzk3YXlQRmtNOTdGR3h5UFVuZGsyMFhUOFZVQm93ZXFpZWpGZGhfNDFJczFUUDVlN2x0Tk1aeHZqOFFH?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
@@ -275,7 +283,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "평택시, 제16회 전국밴드경연대회 개최…7월 26일까지 참가 접수 - kmaeil.com",
+      "title": "평택시, 제16회 전국밴드경연대회 개최…7월 26일까지 참가 접수 - 경인매일",
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBtclNpRUdDVU9lSV84RmVEc1pzSk5rRzNnLS12NFBINEVRb1lodGozT2c0by10ZF84LW9NYV9XQ1BiWFJweGFFNGktcG5tWFRwdGIwMEM2M0xJcGZCWTBjUXdBTUNxVW54?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
@@ -291,14 +299,6 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기도, 10월 17∼18일 수원에서 '경기인디뮤직페스티벌' 개최 - 연합뉴스",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBkMVVGQjN6R3VlYzlnVlN4TzRLYmFXLTc5cHRPdHY1QXdHYzFJZHpVS2tydUw1ei0xZzlSVmJHWXV0eTY0WGVuVGloVTYxYTVac2dOaWswb09MRm8?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-06-08T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
       "title": "가을 수원에 인디 음악 물결…서호잔디광장 축제 무대 활짝 - 전자신문",
       "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE56MGx1blQ2VnhqSU9SR3hjMDU3eE9zTHlWSFF6SUYtbVhxWTFEY2Faa2N1ZmhfZXU5Y0dsMnIxV0pfZTFJUnZKRUxsSkZIQQ?oc=5",
       "source": "Google News · 밴드 공고",
@@ -307,8 +307,8 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기인디뮤직페스티벌 10월 17일 개막 - sisaon.co.kr",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5uaGI4anpYWDJlQnBkczNZd082UHFlSVFsVW5EOU5XVmhwa0FTSnpZT2F0SmJoY194a2YxbzUtblBHTVVTY3pLQ3NBNS10Qm1uX0lUNHdkS2hZV0JfUFI1aTRJUjBRd05Iakgw?oc=5",
+      "title": "경기도, 10월 17~18일 수원에서 ‘경기인디뮤직페스티벌’ 개최 - 파주에서신문",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE54ZU9wZUpKeXVMRFlQZFpaNlo0azdmbEVRUG9BUlFhNWVQcUladVdpSmF0VFJjMTl3SUFZaFlsZEM0NENBR1I0OU1oX0xFQmc0Q0pjN21rZmhhQjJwY0ZWY3duRHl5MjQ?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-06-08T07:00:00.000Z"
