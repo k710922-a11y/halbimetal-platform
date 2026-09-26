@@ -1,6 +1,14 @@
 {
-  "generatedAt": "2026-09-25T21:39:08.677Z",
+  "generatedAt": "2026-09-26T05:07:16.566Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOkFDL0RD",
+      "title": "AC/DC Postpones Show At MetLife Stadium Due To &#039;Incoming Inclement Weather&#039;",
+      "url": "https://blabbermouth.net/news/ac-dc-postpones-show-at-metlife-stadium-due-to-incoming-inclement-weather",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-09-25T23:12:13.000Z"
+    },
     {
       "id": "TWV0YWwgSW5qZWN0aW9uOkJ1",
       "title": "Bullet For My Valentine, Suicide Silence, Polyphia &#038; More Added to Metal Injection&#039;s Top Tracks of the Week",
@@ -8,6 +16,14 @@
       "source": "Metal Injection",
       "category": "metal",
       "publishedAt": "2026-09-25T21:30:07.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOlJJVENI",
+      "title": "RITCHIE BLACKMORE Says His Onstage Reunion With DEEP PURPLE Went Down Like He &#039;Just Invented The Cure For Cancer&#039;: &#039;The People Went Nuts&#039;",
+      "url": "https://blabbermouth.net/news/ritchie-blackmore-says-his-onstage-reunion-with-deep-purple-went-down-like-he-just-invented-the-cure-for-cancer-the-people-went-nuts",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-09-25T21:04:06.000Z"
     },
     {
       "id": "TWV0YWwgSW5qZWN0aW9uOkxJ",
@@ -146,25 +162,9 @@
       "publishedAt": "2026-09-25T14:45:18.000Z"
     },
     {
-      "id": "QmxhYmJlcm1vdXRoOlNlZSBP",
-      "title": "See Official Video Of SOUNDGARDEN&#039;s Performance With TAYLOR MOMSEN And MIKE MCCREADY At SEATTLE SEAHAWKS Season Opener",
-      "url": "https://blabbermouth.net/news/see-official-video-of-soundgardens-performance-with-taylor-momsen-and-mike-mccready-at-seattle-seahawks-season-opener",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-09-25T14:20:34.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOkpVREFT",
-      "title": "JUDAS PRIEST&#039;s &#039;Sad Wings Of Destiny&#039; To Be Re-Released As &#039;Original 1976 Masters&#039; And &#039;Remixed & Remastered&#039; Editions",
-      "url": "https://blabbermouth.net/news/judas-priests-sad-wings-of-destiny-to-be-re-released-as-original-1976-masters-and-remixed-remastered-editions",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-09-25T14:00:11.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "파주시 청소년동아리, 이제는 ‘판을 흔들다’ - 경기인터넷신문",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBCX05xWno3VllQYkdCTHU2OFIzaUZFVEVkU0dDSFJ6dFNBai1CcXRVOTdCSkltQlJYZU5KWTg1MU1ZQ09EbVhoZw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE5RUmE5VUFlQ0lZVFU3N1JLUU0wUDVmREJndmlqZmFjalV0WjBCUmpscG84SS1fR3ZfamxuY201VHA1QjczRFpR?oc=5",
       "source": "Google News · 공연 모집",
       "category": "opportunity",
       "publishedAt": "2026-09-22T08:55:00.000Z"
@@ -187,6 +187,14 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
+      "title": "동작구, '제1회 청년 창작 문화 페스티벌' 참가자 모집 - BBS불교방송",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4zT0JLNXNSeFRaNFI1Vkk1Qm9wMEUxc0lGYmZiSTJMSThkYkVMYVN3WFdNYjVCSDkwclRxVHh2NDY1MWQ2dWlvbFBCb0RlSmx5VGZ6dm51ZHM5OVVLNkhJbHJOQ3pQWmJ4dGk4?oc=5",
+      "source": "Google News · 밴드 공고",
+      "category": "opportunity",
+      "publishedAt": "2026-08-11T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
       "title": "“주인공은 나야 나!” ...동작구, 청년 페스티벌 참가자 모집 - 헤럴드경제",
       "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1jdjVidEVEQ2JwTHhBSTZpUjBrMTlScEFScHUyWmhDdG5pMHN2RFV6S1lZZGd3aWpWek5YVTBGVXQ1Z2tDcEJZZV9vRm1KV2U2d0JEdXRR?oc=5",
       "source": "Google News · 밴드 공고",
@@ -195,8 +203,8 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "\"주인공은 나야 나!\"…동작구, 청년 페스티벌 참가자 모집 - 네이트",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9hYlZ2QkhTcHJPNWFfSEw0WWtCbEZyMHM5RWJHMnZMTzgwTlFmUFZ4TTl6Y2xGN2Q4MlRTa1BIMFRaWEp0RU42ZVNGWHI2UldLcC1pcnNuY2NHajdnS3dMcXl0SFpzaDhndElFUFZ6MV84SjQ2VDFMdQ?oc=5",
+      "title": "\"주인공은 나야 나\" 동작구, 청년 페스티벌 참가자 모집 - 경기뉴스원",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5IUXVDZThRMkdTcGFHSGdxVmFNcWEzWjRLbXRycjlLc05xZ1hnbGp3bXFQWEVpbk5uaXZyczh2QXFhX1FSMUo5N1BQdDJhUXJyNDFWaTlackZpcXVxNEJINVNRRQ?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-08-11T07:00:00.000Z"
@@ -307,19 +315,11 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "“퇴근 후 QWER·실리카겔”… 2030 직장인 밴드, 홍대로 컴백 - 조선비즈 - Chosunbiz",
+      "title": "“퇴근 후 QWER·실리카겔”… 2030 직장인 밴드, 홍대로 컴백 - 조선비즈 - biz.chosun.com",
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNV0lzQkxhZHhxcXBPRGVMQ0hvNHJiN014T191alBFNmJXUm1qSk1QNnp3TXVKRkxUQmJXY1d4QXB0c3RrTERtQ3ZNc1pTc1ZGRDI3Z3lSTVYxTzAzTWp2SW40NnRuRHhwRm1hZzFLaV92czZ3cFBxcF9MaC1WaXBfcy1nTkRKczd3bWfSAZ4BQVVfeXFMTkRmbzRfSC1pU2EySGtPYmQ5T1Q3aVZFYVpsbUxxdEtIbTYxMHZmOEpKWlBiOEhvLUtnSXNRRnM2THhDd1VsZUpOY1dUWkJMMzdRQ0lleEx3WkJldjdFY0k3WDIybFNuV0o3aHZxdG5CbkF6bDYydUNYV2FTSGhHemFTU21abC1HLTRIM1c2dEc1MWJ4VG8wZ09uQXNfMlE?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-05-25T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "“모든 영희에게 영광을”…복합 문화예술축제 〈영희 페스티벌〉 6월 개막 - newskorea.ne.kr",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4zS1NXNHhIV29WR0pRRFo5b09ULUVhU0tKdkNUenlqWjJIVDdQWUF0dnVmbEYtcUk0T1ZvS2JtNnFaOUNfRl9OclhSNURYdm5uRl84bTJJcHA3bHRqaEVqVDV3WWhwMHh3UGRLZHB3?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-05-22T07:00:00.000Z"
     }
   ],
   "errors": []
