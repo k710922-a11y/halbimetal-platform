@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T05:24:57.597Z",
+  "generatedAt": "2026-10-03T11:46:40.138Z",
   "items": [
     {
       "id": "QmxhYmJlcm1vdXRoOkJSVUNF",
@@ -162,6 +162,14 @@
       "publishedAt": "2026-10-02T13:01:14.000Z"
     },
     {
+      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
+      "title": "경기도, 10월 17~18일 수원에서 `경기인디뮤직페스티벌` 개최 - 경인통신",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5OeHd1RmxDZ2w1ZmFjMjJnYmhRSTlDaXVvenFSSk1mRXZzTzlvZlllVnpFZTkyYzNaaFE5d1lDYWZJSS1rTjRaTzhEY1JlRXJQ?oc=5",
+      "source": "Google News · 밴드 공고",
+      "category": "opportunity",
+      "publishedAt": "2026-10-03T02:55:11.000Z"
+    },
+    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "[대구 중구 소식] 대구중구도심재생문화재단, '제12회 김광석 나의 노래 다시 부르기 대회' 참가자 모집 - 일요서울i",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFB5dDQtV1JhYzFlSTA5MDd3RUR1elV5RW04STNQNGZPRUl6b21aWG1SUjFMX0N2MDRlSmZUb2VOVmMtVWtsMll5a0gtOFJYR0FDcUdERDRpdGFTNVdxcUhLbFktWjAxYlhIVWgxallNcw?oc=5",
@@ -170,20 +178,20 @@
       "publishedAt": "2026-09-29T03:34:27.000Z"
     },
     {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "서울 강서구 '한마음 페스티벌' 개최…유통단지와 주민 상생의 장 - 데일리안",
-      "url": "https://news.google.com/rss/articles/CBMiowJBVV95cUxQM1hna1FrbXJTTzFBUXhXNlNRbXZjZllNRFBuU1ZMTlRxTGNvNTRMSFlmdjAyUWp3TlU2YXZ5YmtGQzZsQ0tpcHUtTGRfZjg3SFQ5R1NVSms5Uy01RXU1N2pnSzdVTXpsX01YeGxCZ2JYMmVXdXgtdjkxSTVIVjFqVVZFdXNULTladnBvZDFfNXVpNFlidzNYalFVM1lnbVNvQUowV3htOGlxdlY2Vl9Fc3pwN0lHeU9oN19MVWJoMklDeGN3U0xrVERMX1ZRdEVxaVpBdHpwcEZfMjhEYTIxSm5MaklleHBNb2tNdnAyOE9zdEp1bTVoc3NNUjByWHFCNEJnWk9xbDk0QXJlMzZRQkhmdkgxMUNfU3hwMmh6VTl6dkk?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-09-29T01:45:00.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "파주시 청소년동아리, 이제는 ‘판을 흔들다’ - 경기인터넷신문",
       "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE5RUmE5VUFlQ0lZVFU3N1JLUU0wUDVmREJndmlqZmFjalV0WjBCUmpscG84SS1fR3ZfamxuY201VHA1QjczRFpR?oc=5",
       "source": "Google News · 공연 모집",
       "category": "opportunity",
       "publishedAt": "2026-09-22T08:55:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
+      "title": "\"주인공은 나야 나\" 동작구, 청년 페스티벌 참가자 모집 - 대한투데이",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBaUzYzZmJfS05JaDhIbUNqQ0FsVWNSZ21kOEIzS3RGTElJNDZxZ0lNLXo2SjdKLUZxX3AzbFZ5cXd2OGl1b2lSeER0WVIyejR5MF9WY29tUFBjcDhjdUZBUjk2eEdfX2VFVVE?oc=5",
+      "source": "Google News · 밴드 공고",
+      "category": "opportunity",
+      "publishedAt": "2026-09-19T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
@@ -219,24 +227,8 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "\"주인공은 나야 나!\"…동작구, 청년 페스티벌 참가자 모집 - 네이트",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9hYlZ2QkhTcHJPNWFfSEw0WWtCbEZyMHM5RWJHMnZMTzgwTlFmUFZ4TTl6Y2xGN2Q4MlRTa1BIMFRaWEp0RU42ZVNGWHI2UldLcC1pcnNuY2NHajdnS3dMcXl0SFpzaDhndElFUFZ6MV84SjQ2VDFMdQ?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-08-11T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
       "title": "동작구, ‘제1회 청년 창작 문화 페스티벌’ 참가자 모집 - 시정일보",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBvaVJ3M2VUVHdmYkpGVGVQWFpqVksxWnprZUZlN3FOV2dnSm9GTkxVeWstX0lEWDc0eHBPaXB2X0FRcVUyMWtYa1NaU01xUFVObmZUMFY2eWhZZG8wY0JoVGtfM2REY1liZmI4?oc=5",
-      "source": "Google News · 밴드 공고",
-      "category": "opportunity",
-      "publishedAt": "2026-08-11T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "동작구 청년 페스티벌 참가자 모집…공연·전시·마켓·체험 4개 분야, 8월 14일까지 접수 - 파이낸스투데이",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBkTUp5UGZQNnNsVHlCUmc1SG8yWmRVVHJmSDNjSURNT05kbGpqcnlXNTNickdXNzUwd3VUNnNUQUNRei1sN3hHOVhnMjhFb0pDRWJIUXFXcFRnOEE5c1lZelNhUDN0ZU1xTGtaNQ?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-08-11T07:00:00.000Z"
@@ -307,16 +299,24 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기도, 10월 17∼18일 수원에서 '경기인디뮤직페스티벌' 개최 - 연합뉴스",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBkMVVGQjN6R3VlYzlnVlN4TzRLYmFXLTc5cHRPdHY1QXdHYzFJZHpVS2tydUw1ei0xZzlSVmJHWXV0eTY0WGVuVGloVTYxYTVac2dOaWswb09MRm8?oc=5",
+      "title": "경기도, 10월 17~18일 수원에서 `경기인디뮤직페스티벌` 개최 - 문화매일신문",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1MHdkS2ZpSmVMc3hVNHlwVlJEZkxac2Frc0NyY0JjbklnWHlaeWt6QzZqZUxaODB2eE01UnE1YU4xRHdyVUpNV203Q3V5T1dmaUJ6Tm9LNTJva2VBeWhja0NkV0RqVVU?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-06-08T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
-      "title": "경기도, 10월 17~18일 수원에서 `경기인디뮤직페스티벌` 개최 - 문화매일신문",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1MHdkS2ZpSmVMc3hVNHlwVlJEZkxac2Frc0NyY0JjbklnWHlaeWt6QzZqZUxaODB2eE01UnE1YU4xRHdyVUpNV203Q3V5T1dmaUJ6Tm9LNTJva2VBeWhja0NkV0RqVVU?oc=5",
+      "title": "가을 수원에 인디 음악 물결…서호잔디광장 축제 무대 활짝 - 전자신문",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE56MGx1blQ2VnhqSU9SR3hjMDU3eE9zTHlWSFF6SUYtbVhxWTFEY2Faa2N1ZmhfZXU5Y0dsMnIxV0pfZTFJUnZKRUxsSkZIQQ?oc=5",
+      "source": "Google News · 밴드 공고",
+      "category": "opportunity",
+      "publishedAt": "2026-06-08T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
+      "title": "경기콘텐츠진흥원, ‘2026 경기인디뮤직페스티벌’ 수원서 개최 - 정필",
+      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1iVjg3WGNjbmI2N2xIb2hkQ2lpOWc0VElmR011eUZPaUgwX0ZORk81SWNUZnIwTDNCOWIteW5VWk4zLTJiSVpz?oc=5",
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2026-06-08T07:00:00.000Z"
