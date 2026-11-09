@@ -1,6 +1,14 @@
 {
-  "generatedAt": "2026-11-08T22:13:58.694Z",
+  "generatedAt": "2026-11-09T06:47:24.918Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOlNFQkFT",
+      "title": "SEBASTIAN BACH On SKID ROW&#039;s &#039;I Remember You&#039;: &#039;That Song Has Transcended A Lot Of Places That We Never Thought It Would&#039;",
+      "url": "https://blabbermouth.net/news/sebastian-bach-on-skid-rows-i-remember-you-that-song-has-transcended-a-lot-of-places-that-we-never-thought-it-would",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-08T21:19:02.000Z"
+    },
     {
       "id": "QmxhYmJlcm1vdXRoOlpBSyBU",
       "title": "ZAK TELL On Why CLAWFINGER No Longer Performs One Of Its Biggest Songs Containing Anti-Racist Message: The Topic &#039;Deserves To Be Addressed Properly&#039;",
@@ -154,14 +162,6 @@
       "publishedAt": "2026-11-07T16:31:31.000Z"
     },
     {
-      "id": "TWV0YWwgSW5qZWN0aW9uOk96",
-      "title": "Ozzfest Returns, Turnstile Declines Metallica Tour + More Top Stories of the Week",
-      "url": "https://metalinjection.net/injection-reflection/ozzfest-returns-turnstile-declines-metallica-tour-more-top-stories-of-the-week",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-11-07T16:16:34.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "전국 직장인 밴드 문경영강체육공원에서 음악으로 하나 됐다 - 더뉴스코리아",
       "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBoV2tnUWFMMnVaNVpGY3lzWTF2MzlmVEZjaHhaYUNSek5tM1U1VTF6MmhzT0h4ektSSTZkVzhPT09HaEp5cVBmTUlsTXBQN3ZNaU5qUXh3?oc=5",
@@ -288,6 +288,14 @@
       "source": "Google News · 공연 모집",
       "category": "opportunity",
       "publishedAt": "2021-08-11T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
+      "title": "'서울드럼페스티벌' 주인공 드럼경연 참가자 모집 - 내 손안에 서울",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Ick12VVUzdGFwcnRPQ1RHM2hpUjJvSFMtamoxWjFUcW01ZTJPYWhYUThxN1RDV3NISXM3cE1kRmhRU1lLOC0teUZiUVRlTlZWRjFwNTRpcUg?oc=5",
+      "source": "Google News · 공연 모집",
+      "category": "opportunity",
+      "publishedAt": "2019-04-05T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
