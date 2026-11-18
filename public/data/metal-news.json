@@ -1,6 +1,38 @@
 {
-  "generatedAt": "2026-11-17T21:01:23.377Z",
+  "generatedAt": "2026-11-18T07:39:10.389Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOkFWQVRB",
+      "title": "AVATAR Announces May/June 2027 North American Headlining Shows Around METALLICA Support Dates",
+      "url": "https://blabbermouth.net/news/avatar-announces-may-june-2027-north-american-headlining-shows-around-metallica-support-dates",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-18T06:31:40.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOlNURVZF",
+      "title": "STEVE HACKETT Announces New Solo Album &#039;Through A Sea Of Flames&#039;",
+      "url": "https://blabbermouth.net/news/steve-hackett-announces-new-solo-album-through-a-sea-of-flames",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-17T21:40:26.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOkFNQU5E",
+      "title": "AMANDA SOMERVILLE Launches GoFundMe Campaign To Help Her Receive Treatment For Inoperable Cancerous Brain Tumor",
+      "url": "https://blabbermouth.net/news/amanda-somerville-launches-gofundme-campaign-to-help-her-receive-treatment-for-inoperable-cancerous-brain-tumor",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-17T21:05:36.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOlTDnVIg",
+      "title": "TÝR Announces March/April 2027 North American Tour With DYNAZTY, DOMINUM And EDGE OF PARADISE",
+      "url": "https://blabbermouth.net/news/tyr-announces-march-april-2027-north-american-tour-with-dynazty-dominum-and-edge-of-paradise",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-17T20:48:00.000Z"
+    },
     {
       "id": "TWV0YWwgSW5qZWN0aW9uOkF2",
       "title": "Avatar Announce 2027 Headlining Tour With Barbarians of California, Gates to Hell",
@@ -130,38 +162,6 @@
       "publishedAt": "2026-11-17T14:43:08.000Z"
     },
     {
-      "id": "QmxhYmJlcm1vdXRoOktFUlJZ",
-      "title": "KERRY KING Announces &#039;The End Of All Gods&#039; Album, Shares &#039;My War&#039; Single",
-      "url": "https://blabbermouth.net/news/kerry-king-announces-the-end-of-all-gods-album-shares-my-war-single",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-11-17T14:22:11.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOkpFRkYg",
-      "title": "JEFF AMENT Hopes Drummer ABE LABORIEL JR. Will Continue Playing With PEARL JAM: &#039;It Was So Fun To Play With Him&#039;",
-      "url": "https://blabbermouth.net/news/jeff-ament-hopes-drummer-abe-laboriel-jr-will-continue-playing-with-pearl-jam-it-was-so-fun-to-play-with-him",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-11-17T14:01:17.000Z"
-    },
-    {
-      "id": "TWV0YWwgSW5qZWN0aW9uOktl",
-      "title": "Kerry King Drops &#034;My War&#034; Video From &#039;The End of All Gods,&#039; Pre-Order Exclusive Vinyl From Metal Injection",
-      "url": "https://metalinjection.net/news/slug-kerry-king-my-war-video-end-of-all-gods-vinyl",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-11-17T13:59:07.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOkNSQUlH",
-      "title": "CRAIG LOCICERO Feels That Now Is The Right Time For FORBIDDEN",
-      "url": "https://blabbermouth.net/features/craig-locicero-feels-that-now-is-the-right-time-for-forbidden",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-11-17T13:19:32.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
       "title": "동작구, '제1회 청년 창작 문화 페스티벌' 참가자 모집 - BBS불교방송",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4zT0JLNXNSeFRaNFI1Vkk1Qm9wMEUxc0lGYmZiSTJMSThkYkVMYVN3WFdNYjVCSDkwclRxVHh2NDY1MWQ2dWlvbFBCb0RlSmx5VGZ6dm51ZHM5OVVLNkhJbHJOQ3pQWmJ4dGk4?oc=5",
@@ -179,7 +179,7 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "전국 264개 팀 도전…평택전국밴드경연대회 본선 진출 10팀 확정 - newskorea.ne.kr",
+      "title": "전국 264개 팀 도전…평택전국밴드경연대회 본선 진출 10팀 확정 - 뉴스코리아",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5RbmpqTTNqcmVGOERRb1FWRlFpZkswVXEtOUE5RXhKb0toMzJmeHpETU9TekZhWXRFbjUwUGdtN1JHRkVrN2FfNUtidnZpelZWcDlQX3prUEFzVDBrYm1kS0hSR3gtYWpzVHNxSkVB?oc=5",
       "source": "Google News · 공연 모집",
       "category": "opportunity",
