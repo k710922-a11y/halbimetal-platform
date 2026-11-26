@@ -1,6 +1,22 @@
 {
-  "generatedAt": "2026-11-25T21:47:27.212Z",
+  "generatedAt": "2026-11-26T08:32:01.108Z",
   "items": [
+    {
+      "id": "QmxhYmJlcm1vdXRoOkxlZ2Vu",
+      "title": "Legendary Swedish Death Metal Band ENTOMBED To Perform At 2027 Edition Of SWEDEN ROCK FESTIVAL",
+      "url": "https://blabbermouth.net/news/legendary-swedish-death-metal-band-entombed-to-perform-at-2027-edition-of-sweden-rock-festival",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-26T00:41:04.000Z"
+    },
+    {
+      "id": "QmxhYmJlcm1vdXRoOkhFTlJZ",
+      "title": "HENRY ROLLINS Explains Why He Moved From Los Angeles To Nashville",
+      "url": "https://blabbermouth.net/news/henry-rollins-explains-why-he-moved-from-los-angeles-to-nashville",
+      "source": "Blabbermouth",
+      "category": "metal",
+      "publishedAt": "2026-11-25T21:45:30.000Z"
+    },
     {
       "id": "TWV0YWwgSW5qZWN0aW9uOkZv",
       "title": "Founding King Crimson Drummer Michael Giles Dead at 84",
@@ -146,22 +162,6 @@
       "publishedAt": "2026-11-24T22:09:27.000Z"
     },
     {
-      "id": "TWV0YWwgSW5qZWN0aW9uOkhv",
-      "title": "How Is There No Florida Death Metal on the &#039;Grand Theft Auto VI&#039; Soundtrack?",
-      "url": "https://metalinjection.net/editorials/heavy-takes/gta-6-florida-death-metal",
-      "source": "Metal Injection",
-      "category": "metal",
-      "publishedAt": "2026-11-24T20:39:37.000Z"
-    },
-    {
-      "id": "QmxhYmJlcm1vdXRoOkJSVUNF",
-      "title": "BRUCE DICKINSON On Voicing His Political Views: &#039;There&#039;s No Point In Lecturing People, &#039;Cause They Make Up Their Own Minds&#039;",
-      "url": "https://blabbermouth.net/news/bruce-dickinson-on-voicing-his-political-views-theres-no-point-in-lecturing-people-cause-they-make-up-their-own-minds",
-      "source": "Blabbermouth",
-      "category": "metal",
-      "publishedAt": "2026-11-24T20:31:03.000Z"
-    },
-    {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "제주 대중예술 미래 발굴 ‘루키스테이지’ 열린다 - 제주의소리",
       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBWTGJCbmdYRmxVTDM0eVczNWYyMnRGQmtpcGhuMGE0TG5zLXFyS1JqU1VIaDduenJVR3U5ZmJSMi1mQ3NNVDRHUTJaUkpQZXc5OXJaeFhadkM0X0dpMXA4eE52ZUJFN1diSkpB?oc=5",
@@ -176,14 +176,6 @@
       "source": "Google News · 공연 모집",
       "category": "opportunity",
       "publishedAt": "2026-10-28T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "제주 신진 아티스트들의 무대…'2026 루키스테이지' 개최 - 뉴스제주",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE82YTFzWVZPaU0yMjF3SVlmc0ZCWjQzcXhfVV9qZVFVTWt4ZTBSSlZCZHRMRGRCU2FFWEVZNnprcUV6OUNvY0w1ay1RcXlVU3pjMUFLYVRteUdmTnZKeGZ2dk9JOGJXSllHcUFR?oc=5",
-      "source": "Google News · 공연 모집",
-      "category": "opportunity",
-      "publishedAt": "2026-10-22T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
@@ -208,6 +200,14 @@
       "source": "Google News · 공연 모집",
       "category": "opportunity",
       "publishedAt": "2026-09-09T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
+      "title": "[게임 이모저모] 조이시티 ‘프리스타일 풋볼 2’, 밴드 ‘카디’와 메인 테마곡 제작 外 - 워크투데이",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1SaWZ5OVBCQkFCZW41YmVUamZBY1ZLcjVXU1F4eE1tMmJ5T1NTR0VjZjJLZDl0OEhUdVRWTlhqWHpxbWZ0M3JETXI1Z2o2WnZKSkpzTFhOLVJiWF9EdDJsS240Zkt6SkdXQVczUA?oc=5",
+      "source": "Google News · 공연 모집",
+      "category": "opportunity",
+      "publishedAt": "2026-08-27T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg67C0",
@@ -259,14 +259,6 @@
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
-      "title": "노래·댄스·밴드…북구 주민예술경연대회 `펼쳐락(樂)` 참가자 모집 - 매일신문",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB5eTNyZUtuOS04NkpDYmpQS0ZhSHpYS3hxbkx4YWw3aHpDODMxQTROSUpqWnFfb0t2QmFHalpwRXdKcThSWUxRZmo1UkxDSXJlWFQxUjA1bC1WSVJTOUtNZzhB?oc=5",
-      "source": "Google News · 공연 모집",
-      "category": "opportunity",
-      "publishedAt": "2026-03-24T07:00:00.000Z"
-    },
-    {
-      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
       "title": "생활문화페스티벌 참여단체 공모 - 진일보 | 전남일보",
       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9yM2xfQlFGMmVkcjhfeUpkV0c3TUFEdmhVVkJQa3BLQWtNeXZZTEFtMFVLYkp6NzYwWU1NNUhIQnNnUlZMbUJqQ2RUSmZZYWJBWUxEeE9mY08zLVpCN2RDX0EwWW0tNXpZS1RaTVVDTQ?oc=5",
       "source": "Google News · 공연 모집",
@@ -304,6 +296,14 @@
       "source": "Google News · 밴드 공고",
       "category": "opportunity",
       "publishedAt": "2025-06-12T07:00:00.000Z"
+    },
+    {
+      "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
+      "title": "게임과 음악의 만남...GXG 2024, 9월 6일 개막 - 워크투데이",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE52QTJLOVBYenk2cmI2SlFZNmRMWWluc2hXZk5aelZiZ3lYUFlNMkNtYVp0Nk1LMG5uWU9wcGVIOWxwT1QtX2UtQ1JRc0R5ZnhsN1FvNWFhQnNMS2tyY3NkNUF1aDdjQzhYSGt0RA?oc=5",
+      "source": "Google News · 공연 모집",
+      "category": "opportunity",
+      "publishedAt": "2024-08-19T07:00:00.000Z"
     },
     {
       "id": "R29vZ2xlIE5ld3Mgwrcg6rO1",
